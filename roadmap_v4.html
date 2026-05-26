@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Roadmap — Beginner to Production</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0f12;--sur:#141720;--sur2:#1c2030;--sur3:#222840;--bdr:#2a2f3f;--text:#e8eaf0;--muted:#7a8099;--p0:#f59e0b;--p1:#4ade80;--p2:#22d3ee;--p3:#a78bfa;--p4:#fb923c;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.65;}
+.hdr{background:var(--sur);border-bottom:1px solid var(--bdr);padding:2.25rem 2.5rem 1.75rem;position:relative;overflow:hidden;}
+.hdr::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(74,222,128,.06),transparent 70%);pointer-events:none;}
+.hdr-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--p1);text-transform:uppercase;letter-spacing:2px;margin-bottom:.6rem;}
+h1{font-family:'DM Serif Display',serif;font-size:2.4rem;font-weight:400;line-height:1.1;margin-bottom:.6rem;}
+h1 em{font-style:italic;color:var(--p1);}
+.hdr-sub{color:var(--muted);font-size:13px;max-width:600px;margin-bottom:1.25rem;}
+.chips{display:flex;flex-wrap:wrap;gap:7px;}
+.chip{background:var(--sur2);border:1px solid var(--bdr);border-radius:100px;padding:3px 12px;font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace;}
+.chip span{color:var(--text);}
+.pnav{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:50;background:var(--sur);}
+.pbtn{padding:.75rem .85rem;background:none;border:none;border-right:1px solid var(--bdr);border-bottom:2px solid transparent;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;text-align:left;transition:all .2s;}
+.pbtn:last-child{border-right:none;}
+.pbtn .pn{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:2px;}
+.pbtn .pt{font-size:12px;color:var(--text);font-weight:500;}
+.pbtn:hover{background:var(--sur2);}
+.pbtn.p0.active{background:var(--sur2);border-bottom-color:var(--p0);}
+.pbtn.p1.active{background:var(--sur2);border-bottom-color:var(--p1);}
+.pbtn.p2.active{background:var(--sur2);border-bottom-color:var(--p2);}
+.pbtn.p3.active{background:var(--sur2);border-bottom-color:var(--p3);}
+.pbtn.p4.active{background:var(--sur2);border-bottom-color:var(--p4);}
+.lay{display:grid;grid-template-columns:210px 1fr;}
+.sb{background:var(--sur);border-right:1px solid var(--bdr);padding:1rem 0;position:sticky;top:51px;height:calc(100vh - 51px);overflow-y:auto;}
+.sb-ph{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);padding:.8rem 1.1rem .35rem;border-top:1px solid var(--bdr);margin-top:.2rem;}
+.sb-ph:first-child{border-top:none;margin-top:0;}
+.wb{display:block;width:100%;padding:.5rem 1.1rem;background:none;border:none;border-left:3px solid transparent;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;text-align:left;transition:all .15s;}
+.wb:hover{background:var(--sur2);color:var(--text);}
+.wb.active{background:var(--sur2);color:var(--text);font-weight:500;}
+.wb.p0.active{border-left-color:var(--p0);}.wb.p1.active{border-left-color:var(--p1);}.wb.p2.active{border-left-color:var(--p2);}.wb.p3.active{border-left-color:var(--p3);}.wb.p4.active{border-left-color:var(--p4);}
+.wb .wn{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);display:block;margin-bottom:1px;}
+.wb.p0.active .wn{color:var(--p0);}.wb.p1.active .wn{color:var(--p1);}.wb.p2.active .wn{color:var(--p2);}.wb.p3.active .wn{color:var(--p3);}.wb.p4.active .wn{color:var(--p4);}
+.con{padding:2rem 2.5rem;max-width:880px;}
+.wp{display:none;}.wp.vis{display:block;}
+.whdr{margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--bdr);}
+.wtag{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.4rem;}
+.p0t{color:var(--p0);}.p1t{color:var(--p1);}.p2t{color:var(--p2);}.p3t{color:var(--p3);}.p4t{color:var(--p4);}
+.wtitle{font-family:'DM Serif Display',serif;font-size:1.85rem;font-weight:400;line-height:1.2;margin-bottom:.5rem;}
+.wgoal{color:var(--muted);font-size:13px;max-width:620px;margin-bottom:1rem;}
+.skip-banner{display:flex;align-items:flex-start;gap:10px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:.7rem 1rem;margin-bottom:1.25rem;}
+.skip-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.skip-text{font-size:12px;color:#e8c77a;}
+.skip-text strong{color:var(--p0);}
+.bridge{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem;}
+.bc{background:var(--sur2);border:1px solid var(--bdr);border-radius:8px;padding:.65rem .9rem;}
+.bl{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:3px;}
+.bl.from::before{content:'← '}.bl.to::before{content:'→ '}
+.bt{font-size:12px;color:var(--text);}
+.cbar{display:flex;align-items:center;gap:1.1rem;background:var(--sur2);border:1px solid var(--bdr);border-radius:10px;padding:.75rem 1.1rem;margin-bottom:1.75rem;}
+.ci{text-align:center;}
+.cn{font-family:'IBM Plex Mono',monospace;font-size:1.2rem;display:block;line-height:1;}
+.p0n{color:var(--p0);}.p1n{color:var(--p1);}.p2n{color:var(--p2);}.p3n{color:var(--p3);}.p4n{color:var(--p4);}
+.cl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.cdiv{width:1px;height:32px;background:var(--bdr);}
+.sec{margin-bottom:2rem;}
+.stitle{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:.85rem;display:flex;align-items:center;gap:8px;}
+.stitle::after{content:'';flex:1;height:1px;background:var(--bdr);}
+.dgrid{display:flex;flex-direction:column;gap:10px;}
+.drow{background:var(--sur2);border:1px solid var(--bdr);border-radius:10px;overflow:hidden;}
+.drh{display:grid;grid-template-columns:80px 1fr;gap:10px;align-items:start;padding:.75rem .9rem;}
+.dlabel{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.dtbadge{display:inline-block;margin-top:4px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);background:var(--sur3);border:1px solid var(--bdr);border-radius:3px;padding:1px 5px;}
+.dtasks{font-size:13px;color:var(--text);}
+.p0s strong{color:var(--p0);}.p1s strong{color:var(--p1);}.p2s strong{color:var(--p2);}.p3s strong{color:var(--p3);}.p4s strong{color:var(--p4);}
+.ctags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
+.ct{font-family:'IBM Plex Mono',monospace;font-size:10px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:4px;padding:2px 7px;color:var(--muted);}
+.dpr{border-top:1px solid var(--bdr);padding:.65rem .9rem .65rem calc(80px + 10px + .9rem);}
+.prhdr{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:.45rem;display:flex;align-items:center;gap:5px;}
+.prhdr::after{content:'';flex:1;height:1px;background:var(--bdr);}
+.pitems{display:flex;flex-direction:column;gap:5px;}
+.pi{font-size:12px;color:#8a93b2;padding-left:1.1rem;position:relative;line-height:1.55;}
+.pi::before{position:absolute;left:0;top:1px;font-size:10px;}
+.pi-code::before{content:'💻';}.pi-think::before{content:'🔍';}.pi-fix::before{content:'🔧';}.pi-stretch::before{content:'⚡';}
+.pi em{font-style:normal;color:#22d3ee;font-family:'IBM Plex Mono',monospace;font-size:10px;}
+.rlist{display:flex;flex-direction:column;gap:7px;}
+.ri{display:flex;align-items:flex-start;gap:9px;background:var(--sur2);border:1px solid var(--bdr);border-radius:8px;padding:.7rem .9rem;}
+.rt{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.5px;padding:2px 7px;border-radius:3px;white-space:nowrap;flex-shrink:0;}
+.rt-book{background:rgba(167,139,250,.15);color:var(--p3);}
+.rt-doc{background:rgba(34,211,238,.15);color:var(--p2);}
+.rt-vid{background:rgba(74,222,128,.15);color:var(--p1);}
+.rt-repo{background:rgba(251,146,60,.15);color:var(--p4);}
+.rt-tool{background:rgba(245,158,11,.15);color:var(--p0);}
+.rb .rn{font-weight:500;display:block;margin-bottom:2px;font-size:13px;}
+.rb .rnote{color:var(--muted);font-size:11px;}
+.ms{background:var(--sur2);border:1px solid var(--bdr);border-radius:12px;overflow:hidden;}
+.ms-hdr{border-bottom:1px solid var(--bdr);padding:1rem 1.3rem;display:flex;align-items:flex-start;gap:.8rem;}
+.p0-ms .ms-hdr{background:linear-gradient(135deg,rgba(245,158,11,.08),transparent);}
+.p1-ms .ms-hdr{background:linear-gradient(135deg,rgba(74,222,128,.08),rgba(34,211,238,.04));}
+.p2-ms .ms-hdr{background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(167,139,250,.04));}
+.p3-ms .ms-hdr{background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(251,146,60,.04));}
+.p4-ms .ms-hdr{background:linear-gradient(135deg,rgba(251,146,60,.08),transparent);}
+.ms-icon{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.p0-ms .ms-icon{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);}
+.p1-ms .ms-icon{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);}
+.p2-ms .ms-icon{background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.3);}
+.p3-ms .ms-icon{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);}
+.p4-ms .ms-icon{background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.3);}
+.ms-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;}
+.p0-ms .ms-lbl{color:var(--p0);}.p1-ms .ms-lbl{color:var(--p1);}.p2-ms .ms-lbl{color:var(--p2);}.p3-ms .ms-lbl{color:var(--p3);}.p4-ms .ms-lbl{color:var(--p4);}
+.ms-name{font-size:14px;font-weight:600;margin-bottom:2px;}
+.ms-tag{font-size:12px;color:var(--muted);}
+.ms-body{padding:1rem 1.3rem;}
+.ms-body p{font-size:13px;color:var(--muted);margin-bottom:.8rem;}
+.sl{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.sl li{font-size:12px;color:var(--text);padding-left:1rem;position:relative;}
+.sl li::before{content:'▸';position:absolute;left:0;font-size:9px;top:3px;}
+.p0-ms .sl li::before{color:var(--p0);}.p1-ms .sl li::before{color:var(--p1);}.p2-ms .sl li::before{color:var(--p2);}.p3-ms .sl li::before{color:var(--p3);}.p4-ms .sl li::before{color:var(--p4);}
+.dbadge{display:inline-flex;align-items:center;gap:4px;margin-top:.75rem;border-radius:5px;padding:3px 9px;font-family:'IBM Plex Mono',monospace;font-size:10px;}
+.p0-ms .dbadge{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);color:var(--p0);}
+.p1-ms .dbadge{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);color:var(--p1);}
+.p2-ms .dbadge{background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.25);color:var(--p2);}
+.p3-ms .dbadge{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.25);color:var(--p3);}
+.p4-ms .dbadge{background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.25);color:var(--p4);}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.tc{background:var(--sur2);border:1px solid var(--bdr);border-radius:8px;padding:.7rem .9rem;}
+.tt{font-weight:500;font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-family:'IBM Plex Mono',monospace;margin-bottom:4px;}
+.p0-tc .tt{color:var(--p0);}.p1-tc .tt{color:var(--p1);}.p2-tc .tt{color:var(--p2);}.p3-tc .tt{color:var(--p3);}.p4-tc .tt{color:var(--p4);}
+.tb{color:var(--muted);line-height:1.5;font-size:12px;}
+code{font-family:'IBM Plex Mono',monospace;font-size:11px;background:rgba(255,255,255,.07);border-radius:3px;padding:1px 4px;color:var(--p2);}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-tag">// Beginner to Production — Complete Python Path · Zero Gaps</div>
+  <h1>20-Week Python Roadmap<br><em>Zero Gaps Edition</em></h1>
+  <p class="hdr-sub">Every concept explained from the ground up. Use the ⚡ skip banners to fast-track sections you already know from Java. Same production goals as before — FastAPI, SQLAlchemy, Docker, CI/CD, Observability.</p>
+  <div class="chips">
+    <div class="chip">Phase 0: <span>Wks 1–4 · Absolute Basics</span></div>
+    <div class="chip">Phase 1: <span>Wks 5–8 · Data Structures</span></div>
+    <div class="chip">Phase 2: <span>Wks 9–12 · OOP &amp; Intermediate</span></div>
+    <div class="chip">Phase 3: <span>Wks 13–16 · Backend Dev</span></div>
+    <div class="chip">Phase 4: <span>Wks 17–20 · Production</span></div>
+    <div class="chip">⚡ skip banner: <span>Java devs can skim this</span></div>
+    <div class="chip">← → bridge: <span>shows what connects to what</span></div>
+  </div>
+</div>
+<div class="pnav">
+  <button class="pbtn p0 active" onclick="sw(0)"><span class="pn">Weeks 1–4</span><span class="pt">🧱 Absolute Basics</span></button>
+  <button class="pbtn p1" onclick="sw(1)"><span class="pn">Weeks 5–8</span><span class="pt">📦 Data Structures</span></button>
+  <button class="pbtn p2" onclick="sw(2)"><span class="pn">Weeks 9–12</span><span class="pt">🔧 OOP &amp; Intermediate</span></button>
+  <button class="pbtn p3" onclick="sw(3)"><span class="pn">Weeks 13–16</span><span class="pt">⚡ Backend Dev</span></button>
+  <button class="pbtn p4" onclick="sw(4)"><span class="pn">Weeks 17–20</span><span class="pt">🚀 Production</span></button>
+</div>
+<div class="lay">
+  <aside class="sb" id="sb"></aside>
+  <main class="con" id="con"></main>
+</div>
+<script>
+const W=[
+{p:0,n:1,title:"Variables, Data Types & Print",
+goal:"Learn how Python stores and displays data. Even if you know Java, spend time here noticing the differences — Python's variable system and type model have important distinctions that affect everything else.",
+builds_on:"No prior Python knowledge needed",
+leads_to:"Week 2: Control Flow — you need variables to compare before you can make decisions",
+skip:"Variable declaration syntax is completely different (no <em>int x = 5</em>, just <em>x = 5</em>). Type hints exist but are optional and not enforced at runtime. Spend 30 minutes here and move on.",
+hrs:"1",days:"5",tot:"~5",
+sched:[
+{d:"Mon",t:"<strong>Setup + first program:</strong> Install pyenv, set up uv, learn the REPL. Write your first <code>print()</code>. Understand comments (<code>#</code>).",time:"1 hr",
+concepts:["pyenv","uv","REPL","print()","comments"],
+pr:[
+{t:"code",p:"Install pyenv and Python 3.12. Open the REPL. Type <em>print('Hello, World!')</em>. Type <em>2 + 2</em>. Type <em>'hello' * 3</em>. The REPL evaluates everything instantly — use it constantly this week."},
+{t:"code",p:"Create <em>hello.py</em>. Write 3 print statements: your name, age, and today's date as a string. Add a comment above each line. Run with <em>python hello.py</em>."},
+]},
+{d:"Tue",t:"<strong>Variables:</strong> Assign with <code>=</code>, naming rules (snake_case), multiple assignment, variable swapping. No type declaration needed.",time:"1 hr",
+concepts:["variable assignment","snake_case","multiple assignment","variable swap","reassignment"],
+pr:[
+{t:"code",p:"Create: <em>name = 'Alice'</em>, <em>age = 30</em>, <em>height = 5.6</em>, <em>is_student = True</em>. Print each. Reassign <em>age = 31</em>. Notice Python doesn't complain — there's no <em>final</em> or type lock."},
+{t:"code",p:"Swap two variables in one line using tuple unpacking: <em>a, b = b, a</em>. Prove it works by printing before and after. This has no Java equivalent — Java needs a temp variable."},
+{t:"think",p:"What happens if you print a variable before assigning it? Try <em>print(x)</em> before <em>x = 5</em>. Read the NameError. Understand: Python variables don't exist until assigned — no default value like Java's 0 or null."},
+]},
+{d:"Wed",t:"<strong>Data types:</strong> <code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>, <code>None</code>. Use <code>type()</code> to check. Type conversion with <code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code>.",time:"1 hr",
+concepts:["int","float","str","bool","None","type()","int()","float()","str()"],
+pr:[
+{t:"code",p:"Create one variable of each type. Use <em>type()</em> on each. Print both value and type: <em>print(x, type(x))</em>. Notice everything is an object — even integers — unlike Java's primitives."},
+{t:"code",p:"Type conversion: convert <em>'42'</em> to int, <em>3</em> to float, <em>0</em> to bool, <em>''</em> to bool. What do you get from the last two? These falsy values will matter everywhere in Python."},
+{t:"think",p:"Run <em>isinstance(True, int)</em>. It's True — bool is a subclass of int in Python. So <em>True + True</em> is 2. <em>True * 5</em> is 5. Try it. How does this differ from Java?"},
+]},
+{d:"Thu",t:"<strong>Operators:</strong> Arithmetic (<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>//</code>,<code>%</code>,<code>**</code>), string concatenation, mixing types.",time:"1 hr",
+concepts:["//","**","%","f-strings","type coercion"],
+pr:[
+{t:"code",p:"Calculate: <em>17 / 5</em> (true division → 3.4), <em>17 // 5</em> (floor → 3), <em>17 % 5</em> (remainder → 2), <em>2 ** 10</em> (power → 1024). Which Java operators match? Which don't exist in Java?"},
+{t:"fix",p:"This crashes: <em>print('I am ' + 25 + ' years old')</em>. Why? Fix it two ways: (1) <em>str(25)</em>, (2) f-string. Use f-strings from now on — they're cleaner than any other formatting method."},
+{t:"code",p:"Build a tip calculator: <em>bill = float(input('Bill: '))</em>, calculate 18% tip, print tip and total formatted to 2 decimal places using f-strings."},
+]},
+{d:"Fri",t:"<strong>Input & first complete program:</strong> <code>input()</code> always returns a string — always convert it. Build an interactive program using everything this week.",time:"1 hr",
+concepts:["input()","str to int/float","interactive programs","f-string formatting"],
+pr:[
+{t:"code",p:"Personal info card: ask for name, age, city. Calculate birth year. Display a formatted card with all info using f-strings. Handle: what if they type a non-number for age?"},
+{t:"code",p:"Unit converter: ask if user wants miles→km or kg→lbs, read their number, convert, display. This uses variables, operators, input, and f-strings together."},
+]},
+],
+res:[
+{type:"vid",name:"Corey Schafer — Python Tutorials (YouTube)",note:"The best Python tutorial series. Start from Video 1 — clear, no filler."},
+{type:"vid",name:"CS Dojo — Python for Beginners (YouTube)",note:"Beginner-focused. Good for the first week alongside Corey Schafer."},
+{type:"tool",name:"Python Tutor — pythontutor.com",note:"Visualizes exactly what Python does step-by-step. Use whenever something doesn't make sense."},
+],
+ms:{icon:"🧮",name:"Personal Finance Calculator",tag:"Variables, types, operators, input — all in one",
+desc:"A calculator that takes user input and produces a budget analysis. No libraries, no tricks — just this week's fundamentals.",
+specs:["Ask for monthly income, rent, food budget, and miscellaneous expenses","Calculate total expenses, money remaining, and savings rate as a percentage","If expenses exceed income, print a clear warning message","Format all currency output with 2 decimal places using f-strings","Run in the terminal — no file saving yet"],
+deploy:"python finance.py · terminal only"},
+tips:[
+{title:"No Type Declaration",body:"Java: <em>int x = 5</em>. Python: <em>x = 5</em>. Python infers the type. You can reassign any variable to any type later — dynamic typing. It's flexible but requires discipline."},
+{title:"None vs null",body:"Python's <em>None</em> is like Java's <em>null</em> but it's an actual object of type NoneType. Always check with <em>x is None</em> not <em>x == None</em> — the == can be overridden by custom classes."},
+{title:"input() is always str",body:"<em>input()</em> returns a string, even if the user types a number. Always convert: <em>age = int(input('Age: '))</em>. Forgetting this is the #1 beginner crash."},
+{title:"REPL constantly",body:"When something is unclear, test it in the REPL immediately. <em>python</em> in your terminal opens it. <em>exit()</em> closes it. The REPL gives you instant feedback — use it like a calculator."},
+]},
+
+{p:0,n:2,title:"Control Flow — Decisions & Conditions",
+goal:"Make programs smart enough to make decisions. if/elif/else, comparison operators, boolean logic, and Python's powerful truthiness system. Most of this maps directly from Java — focus on what's different.",
+builds_on:"Week 1: Variables and data types — you need values to compare and branch on",
+leads_to:"Week 3: Loops — control flow + loops together let you build real, repeating logic",
+skip:"if/else is nearly identical to Java. Key differences: <em>elif</em> not <em>else if</em>, no parentheses required, no braces. The big new concept is Python's truthiness — every value has a boolean meaning. Focus there.",
+hrs:"1",days:"5",tot:"~5",
+sched:[
+{d:"Mon",t:"<strong>Comparison operators:</strong> <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>is</code>, <code>is not</code>. Value equality vs identity.",time:"1 hr",
+concepts:["==","!=","is","is not","value vs identity"],
+pr:[
+{t:"code",p:"<em>a = [1,2,3]; b = [1,2,3]</em>. Test <em>a == b</em> (True — same value) and <em>a is b</em> (False — different objects). Explain: == compares content, is compares memory address. Same as Java's equals() vs ==."},
+{t:"think",p:"Run <em>x = None; print(x == None); print(x is None)</em>. Both True here, but always use <em>is None</em>. Why? Because any custom class can override == to return True for anything. 'is' cannot be overridden."},
+]},
+{d:"Tue",t:"<strong>if / elif / else:</strong> Python uses indentation (4 spaces) instead of braces. <code>elif</code> not <code>else if</code>. Colon after every condition.",time:"1 hr",
+concepts:["if","elif","else","indentation","colon","4 spaces"],
+pr:[
+{t:"code",p:"Grade classifier: given a score 0–100, print A (90+), B (80–89), C (70–79), D (60–69), F (below 60). Use if/elif/elif/elif/else. Test with at least 6 scores. Notice: no braces, just indentation."},
+{t:"fix",p:"Find and fix the indentation error: <em>if x > 10:\\nprint('big')\\n  print('really big')</em>. Rule: ALL lines in the same block must have EXACTLY the same indentation. Python will crash if they don't."},
+]},
+{d:"Wed",t:"<strong>Boolean operators:</strong> <code>and</code>, <code>or</code>, <code>not</code>. Short-circuit evaluation. Combining conditions.",time:"1 hr",
+concepts:["and","or","not","short-circuit","compound conditions"],
+pr:[
+{t:"code",p:"Login checker: user can log in if (username == 'admin' AND password == 'secret') OR they are a member (is_member == True). Write using and/or. Test all 4 combinations of admin/non-admin × member/non-member."},
+{t:"think",p:"Python uses <em>and/or/not</em> as words. Java uses <em>&&/||/!</em>. Logic is identical. Short-circuit: in <em>A and B</em>, if A is False, B never executes. Prove this: make B call a function with a print — observe when the print fires."},
+]},
+{d:"Thu",t:"<strong>Truthiness — Python's superpower:</strong> Every value has a boolean meaning. You rarely need to compare to True, False, 0, or empty.",time:"1 hr",
+concepts:["truthy","falsy","empty containers","None check","bool()"],
+pr:[
+{t:"code",p:"Test truthiness of: <em>0, 0.0, '', [], {}, set(), None, False</em> — all falsy. Test: <em>1, 'hello', [0], {'a':1}, True</em> — all truthy. This means <em>if my_list:</em> checks non-empty. <em>if user:</em> checks not None."},
+{t:"fix",p:"Replace with Pythonic versions: (1) <em>if len(items) > 0:</em>, (2) <em>if name != '':</em>, (3) <em>if user is not None:</em>. Each has a simpler Python form using truthiness. What are they?"},
+]},
+{d:"Fri",t:"<strong>Ternary expressions &amp; match:</strong> One-line if/else. Python 3.10+ match statement (like switch/case).",time:"1 hr",
+concepts:["ternary","x if cond else y","match statement","pattern matching"],
+pr:[
+{t:"code",p:"Rewrite as ternary: <em>if score >= 60: result = 'pass'\\nelse: result = 'fail'</em>. Then: <em>label = 'adult' if age >= 18 else 'minor'</em>. When does a ternary make code less readable? Write an example that's too complex."},
+{t:"code",p:"Use match statement for HTTP status codes: 200→OK, 404→Not Found, 500→Server Error, else→Unknown. This is Python's switch/case added in 3.10. Compare to Java's switch expression."},
+]},
+],
+res:[
+{type:"vid",name:"Corey Schafer — Conditionals (YouTube)",note:"Clear walkthrough of if/elif/else with real examples."},
+{type:"doc",name:"Python Docs — Truth Value Testing",note:"docs.python.org — search 'truth value testing'. Read the full falsy values list."},
+],
+ms:{icon:"🎮",name:"Number Guessing Game",tag:"Conditionals, comparisons, boolean logic",
+desc:"The classic guessing game. Demonstrates every control flow concept from this week.",
+specs:["Computer picks a random number 1–100 using <em>random.randint(1, 100)</em>","Player guesses; program says 'too high', 'too low', or 'correct!'","Track and display the number of guesses","Rate performance: 1–5 guesses = Amazing, 6–10 = Good, 11+ = Keep practicing","Handle invalid input (letters, decimals) without crashing"],
+deploy:"python guessing_game.py · terminal"},
+tips:[
+{title:"elif not else if",body:"Java: <em>else if</em>. Python: <em>elif</em>. One word. No space. This is the most common syntax mistake Java developers make in their first Python week."},
+{title:"No parentheses",body:"Java: <em>if (x > 5) {</em>. Python: <em>if x > 5:</em>. No parentheses, no braces. Parentheses are legal but never used in practice — they signal to other Python devs that you're new."},
+{title:"Truthiness saves lines",body:"<em>if items:</em> is cleaner than <em>if len(items) != 0:</em>. <em>if user:</em> is cleaner than <em>if user is not None:</em>. Embrace Python's truthiness — it makes code significantly shorter."},
+{title:"Indentation IS syntax",body:"Python uses indentation instead of braces. 4 spaces per level — not 2, not tabs. Configure your editor: Tab key inserts 4 spaces. Mixing spaces and tabs will crash your program silently in Python 3."},
+]},
+
+{p:0,n:3,title:"Loops — Repeating Actions",
+goal:"Make programs repeat tasks automatically. while loops, for loops, break, continue, range(), enumerate(), zip(), and Python's unique loop else clause. Loops are universal — focus on the Python-specific patterns.",
+builds_on:"Week 2: Control flow — loops are control flow that cycles back to the top",
+leads_to:"Week 4: Functions — loops inside functions create reusable, repeating logic",
+skip:"While loops are identical to Java. For loops are completely different — Python has no C-style for(int i=0;i&lt;n;i++). Python's for loop is always for-each. Use range() when you need a counter.",
+hrs:"1",days:"5",tot:"~5",
+sched:[
+{d:"Mon",t:"<strong>while loops:</strong> Run as long as condition is True. <code>break</code> to exit, <code>continue</code> to skip. Avoiding infinite loops.",time:"1 hr",
+concepts:["while","break","continue","infinite loop","while True"],
+pr:[
+{t:"code",p:"Count 1–10 with while. Modify to skip odd numbers with <em>continue</em>. Add a <em>break</em> that stops at the first number divisible by 7. Trace exactly which iterations run for each version."},
+{t:"code",p:"Password validator: keep asking for a password until it's at least 8 characters AND contains a number. Use <em>while True</em> with <em>break</em>. Count attempts. Print result."},
+]},
+{d:"Tue",t:"<strong>for loops + range():</strong> Python's for loop is always for-each. <code>range(stop)</code>, <code>range(start,stop)</code>, <code>range(start,stop,step)</code>. Count down with negative step.",time:"1 hr",
+concepts:["for/in","range()","for-each style","step","countdown"],
+pr:[
+{t:"code",p:"Print: numbers 1–20, every 3rd from 0–30, countdown 10→1. Use range() for each. Notice: <em>range(1, 21)</em> not <em>range(1, 20)</em> — the stop is exclusive, like Java's < not <=."},
+{t:"fix",p:"Rewrite this Java-style Python: <em>for i in range(len(fruits)):\\n  print(fruits[i])</em>. Correct Python: <em>for fruit in fruits:\\n  print(fruit)</em>. The Java-style works but looks wrong to every Python developer."},
+]},
+{d:"Wed",t:"<strong>enumerate() and zip():</strong> When you need index + item, use <code>enumerate()</code>. To loop two lists together, use <code>zip()</code>.",time:"1 hr",
+concepts:["enumerate()","zip()","unpacking in loops","parallel iteration"],
+pr:[
+{t:"code",p:"Given <em>fruits = ['apple','banana','cherry']</em>, print: '1. apple', '2. banana', '3. cherry'. Use <em>enumerate(fruits, start=1)</em>. Never write <em>range(len(fruits))</em> to get the index."},
+{t:"code",p:"Given <em>names = ['Alice','Bob']</em> and <em>scores = [88, 92]</em>, print 'Alice: 88', 'Bob: 92' using <em>zip()</em>. Then build a dict directly: <em>dict(zip(names, scores))</em>."},
+]},
+{d:"Thu",t:"<strong>Nested loops:</strong> Loops inside loops. Common patterns: grids, pair-finding. Awareness of O(n²) cost.",time:"1 hr",
+concepts:["nested loops","O(n²)","grid patterns","early exit strategy"],
+pr:[
+{t:"code",p:"Print a 10×10 multiplication table using nested loops. Then find all pairs from 1–20 that add up to 25 using nested loops. How many total iterations? Is this efficient for 1 million numbers?"},
+{t:"think",p:"Nested loops run in O(n²) time. With 1000 items that's 1,000,000 iterations. When does this become a problem? What data structure (hint: dict or set) could replace the inner loop and make it O(n)?"},
+]},
+{d:"Fri",t:"<strong>Loop else clause:</strong> Python's loop <code>else</code> runs when loop finishes WITHOUT hitting <code>break</code>. Uniquely Pythonic. <code>pass</code> statement.",time:"1 hr",
+concepts:["loop else","for/else","search pattern","pass"],
+pr:[
+{t:"code",p:"Search a list for a number using for + break + else: break when found, else prints 'not found' when no break occurred. Then rewrite using the <em>in</em> operator: <em>if target in numbers</em>. Which is clearer?"},
+{t:"code",p:"Prime checker: for each number 2–50, use an inner for loop to test divisibility. Use the loop else clause on the inner loop — it fires when no factor was found, meaning the number is prime."},
+]},
+],
+res:[
+{type:"vid",name:"Corey Schafer — Loops (YouTube)",note:"Covers for loops, while loops, and range clearly with examples."},
+{type:"doc",name:"Python Docs — for statement",note:"docs.python.org. Includes the else clause explanation."},
+],
+ms:{icon:"🔢",name:"Number Pattern Printer",tag:"Loops, range, enumerate, nested loops",
+desc:"A program generating number and star patterns — classic loop practice that builds real intuition.",
+specs:["Right triangle of stars (row n has n stars)","Number pyramid: row 1 has '1', row 2 has '1 2', etc.","FizzBuzz 1–100","Prime finder: all primes up to 100 using loop/else","Reverse each of the above patterns","Ask the user which pattern to print"],
+deploy:"python patterns.py · terminal"},
+tips:[
+{title:"for-each always",body:"Python's <em>for</em> is always for-each. When you need an index, use <em>enumerate()</em>. When you need a range of numbers, use <em>range()</em>. Never use <em>range(len(x))</em> just to access items."},
+{title:"zip stops at shortest",body:"<em>zip([1,2,3], ['a','b'])</em> stops after 2 pairs — the shorter list wins. Use <em>itertools.zip_longest</em> if you need to handle all items from the longer list."},
+{title:"break exits one loop",body:"<em>break</em> only exits the innermost loop. To break out of nested loops, use a flag variable or restructure as a function (then return). Python has no labeled break like some other languages."},
+{title:"Java Bridge",body:"Java's for-each (<em>for (String s : list)</em>) maps to Python's <em>for s in my_list</em>. Java's C-style for loop has no Python equivalent — use <em>range()</em> instead."},
+]},
+
+{p:0,n:4,title:"Functions — Reusable Code Blocks",
+goal:"Stop copy-pasting code. Python functions are more flexible than Java methods — default parameters, any number of arguments, and they're first-class values you can pass around. This week's concepts lead directly to decorators (Week 13).",
+builds_on:"Weeks 1–3: Variables, conditions, loops — functions are a way to package all of these into reusable units",
+leads_to:"Week 5: Strings — you'll write functions that process strings. Week 12: Generators and closures build on first-class functions",
+skip:"Basic def/return syntax is easy. Focus on *args, **kwargs, and first-class functions — these have no direct Java equivalent before Java 8 lambdas.",
+hrs:"1",days:"5",tot:"~5",
+sched:[
+{d:"Mon",t:"<strong>Defining and calling functions:</strong> <code>def</code>, <code>return</code>, parameters, docstrings. No return → returns None.",time:"1 hr",
+concepts:["def","return","parameters","arguments","docstring","None return"],
+pr:[
+{t:"code",p:"Write: <em>greet(name)</em> returns 'Hello, name!', <em>square(n)</em> returns n², <em>is_even(n)</em> returns True/False. Call each with 3 different arguments. Print every return value."},
+{t:"think",p:"What does a function return with no <em>return</em> statement? Try: <em>def do_nothing(): pass</em> then <em>print(do_nothing())</em>. In Java, void methods can't be used in expressions. In Python, they return None — which IS a value."},
+]},
+{d:"Tue",t:"<strong>Default parameters &amp; keyword arguments:</strong> Optional parameters with default values. Call with keyword names for clarity.",time:"1 hr",
+concepts:["default params","keyword arguments","positional arguments","argument order rule"],
+pr:[
+{t:"code",p:"Write <em>create_profile(name, age, city='Unknown', is_active=True)</em>. Call it 4 ways: name+age only, all positional, some keyword, all keyword in different order. All should work."},
+{t:"fix",p:"This crashes: <em>def greet(greeting='Hello', name):</em>. Fix it. Rule: parameters WITH defaults must come AFTER parameters WITHOUT. Same in Java. Explain why this rule is necessary."},
+]},
+{d:"Wed",t:"<strong>*args and **kwargs:</strong> Accept any number of positional args with <code>*args</code>. Any number of keyword args with <code>**kwargs</code>.",time:"1 hr",
+concepts:["*args","**kwargs","tuple unpacking","dict unpacking","flexible APIs"],
+pr:[
+{t:"code",p:"Write <em>my_sum(*numbers)</em> that adds any quantity of numbers: works for <em>my_sum(1,2)</em>, <em>my_sum(1,2,3,4,5)</em>, <em>my_sum()</em>. Then <em>describe(**info)</em> that prints each key-value pair from any kwargs passed."},
+{t:"code",p:"Write <em>build_html_tag(tag, content, **attrs)</em>: <em>build_html_tag('a', 'Click me', href='#', class_='btn')</em> → <em>&lt;a href='#' class='btn'&gt;Click me&lt;/a&gt;</em>. This pattern appears in every Python web framework."},
+]},
+{d:"Thu",t:"<strong>Scope — LEGB rule:</strong> Local, Enclosing, Global, Built-in. Why global variables inside functions are dangerous.",time:"1 hr",
+concepts:["LEGB","local scope","global scope","global keyword","enclosing scope"],
+pr:[
+{t:"code",p:"Demonstrate scope: global <em>count = 0</em>. Function tries to modify it without <em>global</em> keyword — creates a local variable instead. Fix with <em>global count</em>. Compare both versions."},
+{t:"think",p:"Why is using <em>global</em> variables generally bad practice? (Hidden dependencies, hard to test, any function can corrupt shared state.) What's the clean alternative? Pass as parameters, return results — keep functions pure."},
+]},
+{d:"Fri",t:"<strong>Functions as first-class objects:</strong> Assign functions to variables, pass them to other functions, return them. This is the foundation of Week 13's decorators.",time:"1 hr",
+concepts:["first-class functions","passing functions","returning functions","lambda","higher-order functions"],
+pr:[
+{t:"code",p:"Assign <em>fn = print</em>. Call <em>fn('hello')</em>. Write <em>apply(func, value)</em> that calls func(value). Call with print, str.upper, len. Functions are just values in Python — this is fundamental."},
+{t:"code",p:"Write a lambda: <em>double = lambda x: x * 2</em>. Use it with sorted: <em>sorted(words, key=lambda w: len(w))</em> sorts by length. When should you use a lambda vs a named function?"},
+]},
+],
+res:[
+{type:"vid",name:"Corey Schafer — Functions (YouTube)",note:"The clearest intro to Python functions. Watch the *args/**kwargs video specifically."},
+{type:"book",name:"Python Crash Course Ch. 8 — Functions",note:"Good practice problems specifically for function design."},
+],
+ms:{icon:"🧮",name:"Math Utilities Library",tag:"Functions, default params, *args, scope — all combined",
+desc:"A library of reusable math functions — the first time you write code meant to be used by other code.",
+specs:["<em>average(*numbers)</em> — works with any count of numbers","<em>clamp(value, min_val=0, max_val=100)</em> — constrains a value to a range","<em>celsius_to_fahrenheit(c)</em> and <em>fahrenheit_to_celsius(f)</em>","<em>is_prime(n)</em> — True if n is prime","<em>fibonacci(n)</em> — returns first n numbers as a list","<em>main()</em> function that demonstrates all of the above"],
+deploy:"python math_utils.py · importable as a module"},
+tips:[
+{title:"Return early",body:"Instead of deep nesting, return early when you have an answer: <em>if n < 0: return 0</em> at the top is cleaner than wrapping everything in else. This is called a 'guard clause'."},
+{title:"One function one job",body:"A function should do ONE thing well. If you're naming it <em>validate_and_save_and_notify</em>, split it into three functions. Single responsibility makes functions testable and reusable."},
+{title:"Lambda limits",body:"Lambdas can only contain a single expression — no if/else blocks, no loops, no assignments. If your lambda is getting complex, use a named function. Readability wins every time."},
+{title:"Java Bridge",body:"Java: <em>public static int square(int n)</em>. Python: <em>def square(n):</em>. No access modifiers, no return type declaration, no static keyword (unless in a class). Methods inside classes still take self as the first parameter."},
+]},
+
+// ── PHASE 1 DATA STRUCTURES ─────────────────────────────────
+{p:1,n:5,title:"Strings — Python's Most Used Type",
+goal:"Master Python strings completely. Every real program manipulates text — Python's string features are far more powerful than Java's. F-strings, slicing, and the method library make text processing fast and readable.",
+builds_on:"Week 1: Basic strings and print. Week 4: Functions — you'll write functions that process and transform strings",
+leads_to:"Week 6: Lists — strings and lists share the same sequence operations (indexing, slicing, iteration)",
+skip:"Java String methods map almost 1:1 to Python. Big additions are: f-strings (much better than String.format), slicing (no Java equivalent), and strings being directly iterable.",
+hrs:"1.5",days:"5",tot:"~7",
+sched:[
+{d:"Mon",t:"<strong>String methods:</strong> <code>upper()</code>, <code>lower()</code>, <code>strip()</code>, <code>split()</code>, <code>join()</code>, <code>replace()</code>, <code>find()</code>, <code>startswith()</code>, <code>endswith()</code>, <code>count()</code>.",time:"1.5 hrs",
+concepts:["str methods","split/join","strip","replace","find","startswith/endswith"],
+pr:[
+{t:"code",p:"Clean messy user input: <em>'  john DOE , 25 , new york  '</em>. Strip whitespace, split on comma, strip each field, title-case the name, lowercase the city, convert age to int. Chain method calls."},
+{t:"code",p:"Write <em>is_palindrome(s)</em>: returns True if s reads the same forwards and backwards ignoring case and spaces. Test: 'racecar', 'A man a plan a canal Panama', 'hello'."},
+]},
+{d:"Tue",t:"<strong>F-strings:</strong> Embed expressions in strings. Format numbers, pad, align. Python's modern string formatting.",time:"1.5 hrs",
+concepts:["f-strings",":.2f",":<20",":>10","!r","nested expressions"],
+pr:[
+{t:"code",p:"Format a receipt: item name left-aligned in 20 chars, price right-aligned in 8 chars with 2 decimal places: <em>f'{item:<20}{price:>8.2f}'</em>. Print 5 items and a total line."},
+{t:"code",p:"F-string expressions: <em>f'{name.upper()}'</em>, <em>f'{2**10}'</em>, <em>f'{\"pass\" if score >= 60 else \"fail\"}'</em>. Any Python expression works inside the braces."},
+]},
+{d:"Wed",t:"<strong>String slicing:</strong> Extract any part of a string with <code>s[start:stop:step]</code>. Negative indices count from the end. Reverse a string in one line.",time:"1.5 hrs",
+concepts:["slicing","s[start:stop:step]","negative indices","reversing","every-other"],
+pr:[
+{t:"code",p:"Given <em>s = 'Hello, World!'</em>: get 'Hello' (first 5), 'World' (indices 7–12), reversed string, every other character. All with slice notation only — no loops, no methods."},
+{t:"code",p:"Write <em>truncate(text, max_len=50)</em>: if longer than max_len, return first (max_len-3) chars + '...'. Otherwise return unchanged. Use slicing. Handle edge cases: text shorter than 3 chars."},
+]},
+{d:"Thu",t:"<strong>String immutability &amp; the join() pattern:</strong> Strings can't be modified — you create new ones. Why += in a loop is O(n²). The join() fix.",time:"1.5 hrs",
+concepts:["immutability","string building","join() pattern","O(n) vs O(n²)","benchmark"],
+pr:[
+{t:"fix",p:"Benchmark this on 10,000 words: <em>result = ''; for w in words: result += w + ' '</em>. Fix with <em>' '.join(words)</em>. Benchmark again. Explain: each += creates a NEW string, copying all previous content. join() does one allocation."},
+{t:"code",p:"Build a Markdown table from a list of dicts using join(): given <em>[{'name':'Alice','score':88}]</em>, produce a properly formatted Markdown table with header, separator row, and data rows."},
+]},
+{d:"Fri",t:"<strong>Regular expressions:</strong> Pattern matching with <code>re</code>. <code>re.search()</code>, <code>re.findall()</code>, <code>re.sub()</code>. Common patterns.",time:"1.5 hrs",
+concepts:["re.search","re.findall","re.sub","regex patterns","regex101"],
+pr:[
+{t:"code",p:"Use <em>re.findall()</em> to: extract all email addresses from a paragraph, find all phone numbers in XXX-XXX-XXXX format, find all words starting with a capital letter."},
+{t:"code",p:"Use <em>re.sub()</em> to: replace all phone numbers with '[PHONE]', remove all HTML tags from a string, normalize multiple spaces to a single space."},
+]},
+],
+res:[
+{type:"doc",name:"Python String Methods — docs.python.org",note:"Complete list. Bookmark it. Most string operations are one method call."},
+{type:"vid",name:"Corey Schafer — String Formatting (YouTube)",note:"Clear coverage of f-strings and all formatting options."},
+{type:"tool",name:"regex101.com",note:"Build and test regex patterns interactively. Explains what each part matches."},
+],
+ms:{icon:"📝",name:"Text Analyzer CLI",tag:"String methods, f-strings, slicing, and regex",
+desc:"A program that analyzes a piece of text and generates a detailed formatted report.",
+specs:["Word count, character count (with/without spaces), sentence count","Top 10 most common words","Longest and shortest word","Check for email addresses or URLs using regex","Formatted report with f-string alignment","Read text from a file passed as a command-line argument"],
+deploy:"python analyze.py my_text.txt · terminal"},
+tips:[
+{title:"Strings are sequences",body:"Strings support the same operations as lists: indexing, slicing, <em>in</em> operator, iteration. <em>for char in 'hello'</em> works. <em>'e' in 'hello'</em> is True. This is called the sequence protocol."},
+{title:"Always f-strings",body:"Use f-strings (Python 3.6+) for all formatting. They're faster than <em>format()</em> and cleaner than <em>% formatting</em>. The old styles exist in legacy code — you'll see them."},
+{title:"strip() on user input",body:"Always call .strip() on text from input() or file reads. Leading/trailing whitespace causes bugs that are extremely hard to spot: 'hello' != 'hello '."},
+{title:"Java Bridge",body:"<em>s.find(sub)</em> = Java's <em>indexOf(sub)</em>. <em>s.replace(a,b)</em> replaces ALL occurrences (Java needs replaceAll for that). <em>'ha' * 3</em> = 'hahaha' — no Java equivalent for string multiplication."},
+]},
+
+{p:1,n:6,title:"Lists — Ordered Collections",
+goal:"Lists are Python's workhorse data structure. They're like Java's ArrayList but with much more powerful syntax — slicing, comprehensions, and a rich method library. Mastering lists means mastering comprehensions, which replace most for-loops that build collections.",
+builds_on:"Week 5: Strings are sequences — lists are the same idea for any type. Week 4: Functions to process lists",
+leads_to:"Week 7: Tuples and Dicts — lists, tuples, and dicts constantly work together in real programs",
+skip:"List basics (indexing, append, len) are trivial. Focus heavily on list comprehensions — they replace most for-loops in Python. Also study slicing and the sorted() key parameter.",
+hrs:"1.5",days:"5",tot:"~7",
+sched:[
+{d:"Mon",t:"<strong>List basics:</strong> Creation, indexing, negative indexing, slicing. Lists hold mixed types. Nested lists. <code>len()</code>.",time:"1.5 hrs",
+concepts:["list creation","indexing","negative index","slicing","nested lists","len()"],
+pr:[
+{t:"code",p:"Create a list of 5 numbers. Access first, last, middle using positive and negative indices. Slice first 3, last 2, every other element. Modify the first element — prove lists are mutable unlike strings."},
+{t:"code",p:"Create a 3×3 grid as nested lists. Access the center element. Change the top-right. Print each row on its own line using a loop."},
+]},
+{d:"Tue",t:"<strong>List methods:</strong> <code>append()</code>, <code>extend()</code>, <code>insert()</code>, <code>remove()</code>, <code>pop()</code>, <code>sort()</code>, <code>reverse()</code>, <code>index()</code>, <code>count()</code>.",time:"1.5 hrs",
+concepts:["append vs extend","insert","remove vs pop","sort vs sorted","index","count"],
+pr:[
+{t:"code",p:"Start: <em>nums = [3,1,4,1,5,9,2,6]</em>. Sort in-place. Find index of 9. Remove the first 1. Pop the last element. Count remaining 1s. Reverse it. Print after each step."},
+{t:"think",p:"What's the difference between <em>append([1,2])</em> and <em>extend([1,2])</em>? Try both. Append adds ONE item (the list itself). Extend unpacks and adds each item. When would you choose each?"},
+]},
+{d:"Wed",t:"<strong>List comprehensions:</strong> Create lists in one readable line. The most distinctly Pythonic feature. Replaces most for-loops that build lists.",time:"1.5 hrs",
+concepts:["list comprehension","[expr for x in iterable]","filter with if","nested comprehension"],
+pr:[
+{t:"code",p:"Replace each for-loop with a comprehension: (1) squares of 1–10, (2) words longer than 4 chars from a sentence, (3) first letter of each word. Compare: comprehensions are shorter AND faster."},
+{t:"code",p:"With filter: even numbers from 1–50 that are also divisible by 3. Nested: flatten <em>[[1,2],[3,4],[5,6]]</em> → <em>[1,2,3,4,5,6]</em>. When is a comprehension too complex? Write one that's hard to read."},
+]},
+{d:"Thu",t:"<strong>Sorting &amp; filtering:</strong> <code>sorted(key=)</code>, <code>min()/max(key=)</code>, <code>filter()</code>, <code>any()</code>, <code>all()</code>.",time:"1.5 hrs",
+concepts:["sorted(key=)","min/max(key=)","any()","all()","key functions","filter()"],
+pr:[
+{t:"code",p:"Given a list of names, sort: alphabetically, by length, by length then alphabetically as tiebreaker. Use <em>sorted(names, key=...)</em> for each. Find the longest name with <em>max(names, key=len)</em>."},
+{t:"code",p:"Given a list of scores: (1) any scores perfect (100)? Use <em>any()</em>. (2) All passing (>=60)? Use <em>all()</em>. (3) Failing scores only — use a comprehension. Print results clearly."},
+]},
+{d:"Fri",t:"<strong>Copying lists &amp; aliasing trap:</strong> <code>list.copy()</code>, slice copy, <code>copy.deepcopy()</code>. The aliasing trap explained.",time:"1.5 hrs",
+concepts:["shallow copy","deep copy","aliasing","copy module","mutation trap"],
+pr:[
+{t:"code",p:"<em>a = [1,2,3]; b = a; b.append(4); print(a)</em>. Why did a change? Fix with <em>b = a.copy()</em>. Show why deepcopy is needed for nested lists: <em>a = [[1,2],[3,4]]; b = a.copy(); b[0].append(99); print(a)</em>."},
+{t:"stretch",p:"Write <em>flatten(nested)</em> that handles any depth: <em>flatten([1,[2,[3,[4]]],5])</em> → <em>[1,2,3,4,5]</em>. Try recursion first. Then try an iterative version with a stack (while loop + list). Which handles very deep nesting better?"},
+]},
+],
+res:[
+{type:"vid",name:"Corey Schafer — Lists (YouTube)",note:"Best intro to Python lists. The comprehension video is essential viewing."},
+{type:"doc",name:"Python List Methods — docs.python.org",note:"Complete list of all list methods with examples and return values."},
+],
+ms:{icon:"🗒️",name:"Student Grade Manager",tag:"Lists, sorting, comprehensions, filtering",
+desc:"Manages a class of students and their grades, demonstrating every list operation from this week.",
+specs:["Students as list of dicts: <em>[{'name':'Alice','grades':[88,92,79]}]</em>","Calculate average grade for each student","Sort students by average descending","Find: top 3 students, students below 70 average (use comprehensions)","Generate a formatted class report with aligned columns","Add and remove students dynamically"],
+deploy:"python grade_manager.py · terminal"},
+tips:[
+{title:"sorted() vs .sort()",body:"<em>sorted(my_list)</em> returns a NEW sorted list — original unchanged. <em>my_list.sort()</em> sorts IN PLACE and returns None. Use sorted() when you need the original; .sort() when you're done with the original order."},
+{title:"Comprehension over map/filter",body:"<em>[x*2 for x in nums]</em> is clearer than <em>list(map(lambda x: x*2, nums))</em>. Python comprehensions are usually preferred over map/filter for readability."},
+{title:"List copy depth",body:"<em>a.copy()</em> and <em>a[:]</em> are SHALLOW copies — nested objects are still shared. Only <em>copy.deepcopy(a)</em> gives full independence. This matters whenever you have lists of lists or lists of dicts."},
+{title:"Java Bridge",body:"Python list ≈ Java ArrayList&lt;Object&gt;. Both are dynamic arrays. Python adds: slicing, comprehensions, mixed types. Python has no typed equivalent to ArrayList&lt;String&gt; — use type hints for that."},
+]},
+
+{p:1,n:7,title:"Tuples, Dictionaries & Sets",
+goal:"Learn Python's other three core data structures. Tuples for immutable records, dicts for key-value lookups, sets for fast membership and deduplication. Together with lists, these four structures cover 95% of all data organization needs.",
+builds_on:"Week 6: Lists — tuples are immutable lists, and dicts/sets share similar operations",
+leads_to:"Week 8: File I/O — reading structured files produces dicts and lists; JSON is just dicts and lists serialized",
+skip:"Dicts are HashMaps, sets are HashSets. Syntax is different, concepts are identical. Tuple has no direct Java equivalent (closest is an immutable ArrayList or Java 16 Records). Focus on dict comprehensions and set operations.",
+hrs:"1.5",days:"5",tot:"~7",
+sched:[
+{d:"Mon",t:"<strong>Tuples:</strong> Immutable ordered sequences. Packing, unpacking, namedtuple. When tuple beats list.",time:"1.5 hrs",
+concepts:["tuple","immutable","unpacking","namedtuple","tuple as dict key"],
+pr:[
+{t:"code",p:"Create <em>point = (3, 4)</em>, <em>rgb = (255, 128, 0)</em>. Unpack: <em>x, y = point</em>. Show <em>point[0] = 5</em> raises TypeError. Use <em>collections.namedtuple('Point', ['x','y'])</em> — access by name, not index."},
+{t:"think",p:"Why use a tuple over a list? Three reasons: (1) documents immutability intent, (2) slightly faster, (3) hashable — can be used as a dict key or in a set. Show <em>{(1,2): 'origin'}</em> works but <em>{[1,2]: 'origin'}</em> crashes."},
+]},
+{d:"Tue",t:"<strong>Dictionary basics:</strong> Create, access, modify dicts. <code>.get(key, default)</code> to avoid KeyError. Iterating over keys, values, items.",time:"1.5 hrs",
+concepts:["dict creation","dict access","KeyError",".get()","in operator","keys/values/items"],
+pr:[
+{t:"code",p:"Phonebook dict: add entries, look up, update, delete. Use <em>.get('Unknown', 'Not found')</em> instead of risking a KeyError. Iterate three ways: (1) keys, (2) values, (3) key-value pairs with .items()."},
+{t:"think",p:"When should you use a list vs a dict? If you find yourself looping through a list to find something by a key field — use a dict. <em>users['alice']</em> is O(1). Looping to find 'alice' is O(n). This is the most common beginner performance mistake."},
+]},
+{d:"Wed",t:"<strong>Dict methods &amp; comprehensions:</strong> <code>update()</code>, <code>setdefault()</code>, <code>pop()</code>, dict merge, dict comprehensions.",time:"1.5 hrs",
+concepts:["update()","setdefault()","dict comprehension","dict merge","fromkeys()"],
+pr:[
+{t:"code",p:"Word frequency counter using dict comprehension: <em>{word: text.count(word) for word in text.split()}</em>. Find top 3 most frequent words. Use <em>setdefault</em> to group words by first letter without checking if key exists."},
+{t:"code",p:"Merge two dicts three ways: <em>{**a, **b}</em>, <em>a | b</em> (3.9+), <em>a.update(b)</em>. Show the mutation difference: which ones create a new dict, which modify in place."},
+]},
+{d:"Thu",t:"<strong>Sets:</strong> Unordered unique items. Fast membership. Set operations: union, intersection, difference, symmetric difference.",time:"1.5 hrs",
+concepts:["set","add","discard","union/intersection/difference","frozenset","O(1) lookup"],
+pr:[
+{t:"code",p:"Two lists of user IDs: active_users and premium_users. Find: (1) both active AND premium (intersection &), (2) active but NOT premium (difference -), (3) either active OR premium (union |). One line each."},
+{t:"code",p:"Prove O(1) membership: create a set and list of 1 million items. Time <em>'x' in my_set</em> vs <em>'x' in my_list</em> using timeit. The set should be 100,000x faster. Explain why."},
+]},
+{d:"Fri",t:"<strong>Choosing the right structure:</strong> List vs tuple vs dict vs set. Complex nested structures.",time:"1.5 hrs",
+concepts:["data structure choice","list of dicts","dict of lists","nested structures"],
+pr:[
+{t:"think",p:"For each scenario, pick the right structure and justify: (1) 100 student records with name/grade/age, (2) track which users have seen which articles, (3) order that events happened, (4) find duplicate emails in 1M addresses fast."},
+{t:"code",p:"In-memory database: a dict where keys are user IDs and values are user dicts. Implement add_user, get_user, update_user, delete_user, find_by_name. Use the right structure for each lookup pattern."},
+]},
+],
+res:[
+{type:"vid",name:"Corey Schafer — Dictionaries (YouTube)",note:"Clear and practical. Watch the sets video immediately after."},
+{type:"doc",name:"Python Data Structures — docs.python.org/tutorial/datastructures",note:"Official tutorial covering all four structures with good examples."},
+],
+ms:{icon:"📱",name:"Contact Book App",tag:"Dicts, tuples, sets — all combined in one project",
+desc:"A contact manager using dicts as the core data structure and sets for tags.",
+specs:["<em>{'Alice': {'phone':'...','email':'...','tags':{'friend','work'}}}</em>","Add, view, update, delete contacts","Search by name (partial), filter by tag (set intersection)","Find duplicate phone numbers using a set","Export contacts sorted alphabetically","Import from simple CSV format"],
+deploy:"python contacts.py · terminal"},
+tips:[
+{title:"Dict deduplication",body:"To remove duplicates from a list: <em>list(set(my_list))</em> — loses order. To deduplicate while preserving order: <em>list(dict.fromkeys(my_list))</em>. Know both patterns."},
+{title:"setdefault pattern",body:"<em>d.setdefault('key', [])</em> returns the existing value if key exists, OR sets it to [] and returns that. Avoid the verbose pattern: <em>if 'key' not in d: d['key'] = []</em>."},
+{title:"frozenset as dict key",body:"Sets are mutable and unhashable. If you need a set as a dict key (e.g., a group of users), use <em>frozenset</em> — it's the immutable, hashable version."},
+{title:"Java Bridge",body:"Python dict = Java HashMap. Python set = Java HashSet. Python frozenset = Java ImmutableSet. Python tuple = closest to Java Records (Java 16+). All have the same O(1) lookup guarantees."},
+]},
+
+{p:1,n:8,title:"Files, JSON, Exceptions & Modules",
+goal:"Make programs interact with the outside world: read and write files, save data as JSON, handle errors gracefully, and organize code into modules and packages. These skills turn scripts into real programs.",
+builds_on:"Week 7: Dicts — JSON is just dicts and lists written to text. Week 4: Functions — modules are organized collections of functions",
+leads_to:"Week 9: OOP — classes are the next level of code organization above modules",
+skip:"try/except maps directly from Java's try/catch — concepts identical, syntax slightly different. JSON is the same format. Context managers (with statement) for file handling have no Java equivalent.",
+hrs:"1.5",days:"5",tot:"~7",
+sched:[
+{d:"Mon",t:"<strong>Reading files:</strong> <code>open()</code>, <code>read()</code>, <code>readlines()</code>, line-by-line iteration. Always use the <code>with</code> statement.",time:"1.5 hrs",
+concepts:["open()","with statement","read()","readlines()","file modes","encoding"],
+pr:[
+{t:"code",p:"Create a text file with 5 lines. Read it 3 ways: (1) read() — whole file as string, (2) readlines() — list of lines, (3) <em>for line in file</em> — iterate lazily. When would you use each?"},
+{t:"think",p:"Why use <em>with open(file) as f:</em> instead of <em>f = open(file)</em>? The <em>with</em> statement guarantees the file closes even if your code crashes inside the block. Without it, a crash leaves files locked."},
+]},
+{d:"Tue",t:"<strong>Writing files &amp; pathlib:</strong> <code>'w'</code> mode (overwrite), <code>'a'</code> mode (append). <code>pathlib.Path</code> for modern path handling.",time:"1.5 hrs",
+concepts:["write mode","append mode","pathlib.Path","Path.read_text","Path.write_text","glob"],
+pr:[
+{t:"code",p:"Timestamped logger: append entries to a log file with 'a' mode. Read it back and print last 5 entries. Use <em>pathlib.Path</em> for the path — no string concatenation for file paths."},
+{t:"code",p:"Use pathlib to: find all .txt files in a directory recursively, get each file's size in KB, print a directory listing sorted by size."},
+]},
+{d:"Wed",t:"<strong>JSON:</strong> Serialize Python dicts/lists to JSON and back. <code>json.dumps()</code>, <code>json.loads()</code>, <code>json.dump()</code>, <code>json.load()</code>.",time:"1.5 hrs",
+concepts:["json.dumps","json.loads","json.dump","json.load","indent","type mapping"],
+pr:[
+{t:"code",p:"Save your Week 7 contacts to JSON with <em>json.dump(contacts, f, indent=2)</em>. Load it back with <em>json.load(f)</em>. Verify data is identical. This is the simplest form of data persistence."},
+{t:"think",p:"What Python types map to JSON? (dict→object, list→array, str→string, int/float→number, bool→true/false, None→null). What DOESN'T map? Try <em>json.dumps({'date': datetime.now()})</em>. What error and why?"},
+]},
+{d:"Thu",t:"<strong>Exceptions:</strong> <code>try/except</code>, specific exception types, <code>else</code>, <code>finally</code>, <code>raise</code>. Custom exception classes.",time:"1.5 hrs",
+concepts:["try/except","FileNotFoundError","ValueError","else clause","finally","raise","custom exceptions"],
+pr:[
+{t:"code",p:"Safe file reader: catch FileNotFoundError (helpful message), PermissionError (different message), use finally to print 'done'. Use the else clause — it runs only when NO exception occurred. Test all three paths."},
+{t:"code",p:"Custom exception: <em>class ValidationError(ValueError): pass</em>. Write <em>validate_age(age)</em> that raises <em>ValidationError('Age must be positive')</em> if age < 0. Catch it specifically in a try/except."},
+]},
+{d:"Fri",t:"<strong>Modules &amp; packages:</strong> Import stdlib, install with uv/pip, organize code into packages with <code>__init__.py</code>.",time:"1.5 hrs",
+concepts:["import","from X import Y","as alias","__name__","packages","__init__.py","uv add"],
+pr:[
+{t:"code",p:"Split your contacts app: <em>contacts/</em> package with <em>__init__.py</em>, <em>storage.py</em> (file I/O), <em>models.py</em> (data structure). Import across files: <em>from contacts.storage import save_contacts</em>."},
+{t:"code",p:"Add <em>if __name__ == '__main__':</em> to your main script. Run directly — block executes. Import from another file — block does NOT execute. This is how Python distinguishes a runnable script from an importable library."},
+]},
+],
+res:[
+{type:"doc",name:"Python pathlib — docs.python.org",note:"Modern file operations. Always use pathlib over os.path in new code."},
+{type:"doc",name:"Python Exceptions — docs.python.org/library/exceptions",note:"Full exception hierarchy tree. Know where common exceptions live."},
+{type:"vid",name:"Corey Schafer — File Objects (YouTube)",note:"Clear walkthrough of file reading, writing, and the with statement."},
+],
+ms:{icon:"💾",name:"JSON Data Manager",tag:"Files, JSON, exceptions, modules — all combined",
+desc:"A complete data management system that saves/loads structured data, handles all errors gracefully, organized as a proper package.",
+specs:["<em>data_manager/</em> package with storage, validation, and query modules","Save/load any list of dicts to/from a JSON file","Handle: file not found, invalid JSON, permission errors — all with helpful messages","Query: filter_by, sort_by, find_one — all return new lists","Log every save/load to a <em>data_manager.log</em> file","CLI: <em>python -m data_manager list</em>, <em>add</em>, <em>delete</em>"],
+deploy:"python -m data_manager · installable as a package"},
+tips:[
+{title:"Always with",body:"Always open files with <em>with open(file) as f:</em>. This guarantees the file closes even if your code crashes mid-read. Forgetting to close files causes resource leaks and data corruption on busy systems."},
+{title:"Catch specific exceptions",body:"<em>except Exception:</em> hides bugs. Catch specifically: <em>except FileNotFoundError:</em>, <em>except json.JSONDecodeError:</em>. If you must catch broadly, log the error — never silently ignore it."},
+{title:"JSON type limits",body:"JSON only supports: strings, numbers, booleans, None, lists, dicts. No datetime, no sets, no custom objects. For dates use <em>str(datetime)</em> and parse back. For sets use <em>list(my_set)</em>."},
+{title:"Java Bridge",body:"Python try/except = Java try/catch. Python finally = Java finally. Python <em>raise ValueError('msg')</em> = Java <em>throw new IllegalArgumentException('msg')</em>. Python <em>except ValueError as e:</em> = Java <em>catch (IllegalArgumentException e)</em>."},
+]},
+
+// ── PHASE 2 OOP & INTERMEDIATE ──────────────────────────────
+{p:2,n:9,title:"Classes & Object-Oriented Programming",
+goal:"Bundle data and behavior together using classes. Python OOP shares core concepts with Java but the syntax and conventions differ significantly. self is explicit, there are no access modifiers, and @property replaces getter/setter patterns.",
+builds_on:"Week 8: Modules — classes are the next level of organization. Week 7: Dicts — a class instance is essentially a dict with methods attached",
+leads_to:"Week 10: Inheritance and dunder methods — once you can write a class, you extend it and customize Python's operator behavior",
+skip:"Class syntax is easy to pick up. Key differences: explicit self, no access modifiers, @classmethod/@staticmethod as decorators, @property instead of getters/setters. Focus on @property and the self convention.",
+hrs:"1.5",days:"5",tot:"~7",
+sched:[
+{d:"Mon",t:"<strong>Class definition &amp; __init__:</strong> <code>class</code> keyword, constructor is <code>__init__</code>, every method takes <code>self</code> as first parameter.",time:"1.5 hrs",
+concepts:["class","__init__","self","instance","attributes","object creation"],
+pr:[
+{t:"code",p:"Build a <em>BankAccount</em>: <em>__init__(self, owner, balance=0)</em>, <em>deposit(self, amount)</em>, <em>withdraw(self, amount)</em> raising if insufficient, <em>get_balance(self)</em>. Create 2 accounts, perform operations on each."},
+{t:"think",p:"Why does every method have self? <em>account.deposit(100)</em> is equivalent to <em>BankAccount.deposit(account, 100)</em>. Methods are just functions — self is how they know which instance to operate on. It's explicit, unlike Java's implicit this."},
+]},
+{d:"Tue",t:"<strong>Class vs instance attributes. @classmethod, @staticmethod:</strong> Class attributes are shared. Instance attributes belong to one object.",time:"1.5 hrs",
+concepts:["class attributes","instance attributes","@classmethod","@staticmethod","cls"],
+pr:[
+{t:"code",p:"Add class attribute <em>BankAccount.bank_name = 'Python Bank'</em>. Show all instances share it. Add <em>@classmethod from_dict(cls, data)</em> — factory method creating an account from a dict. Add <em>@staticmethod validate_amount(amount)</em> with no self or cls."},
+{t:"think",p:"When to use each: instance method (needs the instance), @classmethod (needs the class, e.g., factory methods), @staticmethod (utility function that logically belongs to the class but needs neither). Give one real example of each."},
+]},
+{d:"Wed",t:"<strong>@property — controlled attribute access:</strong> Replaces Java's getter/setter pattern with clean attribute-style access.",time:"1.5 hrs",
+concepts:["@property","@x.setter","computed properties","validation in setter"],
+pr:[
+{t:"code",p:"Add a <em>balance</em> property: getter returns current balance, setter validates the new value is non-negative before setting. This is Python's getter/setter pattern — looks like attribute access, works like a method."},
+{t:"code",p:"Add read-only computed <em>monthly_interest</em> property: returns balance * 0.05 / 12. No setter needed — it's calculated on demand. Show that <em>account.monthly_interest = 100</em> raises AttributeError."},
+]},
+{d:"Thu",t:"<strong>__str__ and __repr__:</strong> How Python displays your objects. print() uses __str__. REPL uses __repr__.",time:"1.5 hrs",
+concepts:["__str__","__repr__","__bool__","__len__","dunder convention"],
+pr:[
+{t:"code",p:"Add <em>__str__</em> returning <em>'Account(Alice, $1,200.00)'</em> and <em>__repr__</em> returning <em>BankAccount(owner='Alice', balance=1200)</em>. Verify: print() calls __str__, typing the variable in REPL calls __repr__."},
+{t:"code",p:"Add <em>__bool__</em> (True if balance > 0) and <em>__len__</em> (number of transactions). Test: <em>if my_account:</em> and <em>len(my_account)</em>. These are the hooks into Python's built-in operations."},
+]},
+{d:"Fri",t:"<strong>Designing a complete class:</strong> Encapsulation, validation, clean interface.",time:"1.5 hrs",
+concepts:["class design","encapsulation","validation","interface","cohesion"],
+pr:[
+{t:"code",p:"Design <em>Temperature</em> from scratch: stores Celsius internally, properties for celsius/fahrenheit/kelvin (all computed), setter validates against absolute zero, good __str__ and __repr__."},
+{t:"stretch",p:"Design <em>ShoppingCart</em>: add_item(name, price, qty=1), remove_item(name), total property, apply_discount(percent), receipt() returns formatted string. Full __str__. Input validation on all methods. Test 5 scenarios."},
+]},
+],
+res:[
+{type:"vid",name:"Corey Schafer — OOP Series (YouTube)",note:"6-video series. Watch all of them this week — best OOP intro available anywhere."},
+{type:"vid",name:"ArjanCodes — OOP in Python (YouTube)",note:"Advanced perspective, especially good for Java devs seeing Python conventions."},
+],
+ms:{icon:"🏦",name:"Banking System",tag:"Classes, properties, dunders — full OOP design",
+desc:"A complete banking system with multiple cooperating classes.",
+specs:["BankAccount with full validation and @property","Transaction (namedtuple): amount, type, timestamp, description","Bank class: create accounts, transfer between accounts, list all","Transaction history recorded for every operation","__str__ and __repr__ on all classes","Save/load to JSON (using Week 8 skills)"],
+deploy:"python bank.py · JSON persistence"},
+tips:[
+{title:"self is convention",body:"Python doesn't enforce the name 'self'. You could call it 'this'. But everyone uses 'self' — deviate and you'll confuse every Python developer who reads your code. Conventions matter."},
+{title:"No private in Python",body:"Python has no private/protected. Convention: prefix with _ for 'internal use': self._balance. Prefix __ for name mangling (rarely needed). Nothing prevents access — it's trust-based."},
+{title:"@property over getters",body:"Java: getBalance() and setBalance(). Python: @property. Then <em>account.balance</em> calls the getter and <em>account.balance = 100</em> calls the setter. Looks like a field, works like a method."},
+{title:"Java Bridge",body:"Java constructor → Python __init__. Java this → Python self. Java toString() → Python __str__. Java equals() → Python __eq__. Java private int balance → Python self._balance."},
+]},
+
+{p:2,n:10,title:"Inheritance & Dunder Methods",
+goal:"Extend and customize classes. Inheritance lets you build on existing code. Dunder methods let you define how Python's built-in operations work on your objects — making them sort, compare, iterate, and support operators.",
+builds_on:"Week 9: Classes — you need a class before you can extend it. __str__ and __repr__ were your first dunders",
+leads_to:"Week 11: Modern Python OOP (dataclasses, ABCs, Pydantic) — builds directly on inheritance and dunders",
+skip:"Single inheritance is essentially identical to Java. super() works the same. Multiple inheritance has no Java equivalent. Focus on MRO and the full dunder protocol — both are Python-specific.",
+hrs:"1.5",days:"5",tot:"~7",
+sched:[
+{d:"Mon",t:"<strong>Single inheritance &amp; super():</strong> Extend classes, override methods, call parent.",time:"1.5 hrs",
+concepts:["inheritance","method override","super()","isinstance","issubclass"],
+pr:[
+{t:"code",p:"Create <em>Animal(name, sound) → Dog(Animal) → GuideDog(Dog)</em>. Override <em>speak()</em> at each level using <em>super().speak()</em> to include parent behavior. Trace execution with print statements."},
+{t:"code",p:"Show isinstance hierarchy: <em>isinstance(my_dog, Animal)</em> is True, <em>type(my_dog) is Animal</em> is False. Write a function that should accept any Animal subclass — which check do you use?"},
+]},
+{d:"Tue",t:"<strong>Multiple inheritance &amp; MRO:</strong> Python allows inheriting from multiple classes. The C3 MRO determines which parent's method runs. Mixin pattern.",time:"1.5 hrs",
+concepts:["multiple inheritance","MRO","__mro__","mixins","cooperative super()"],
+pr:[
+{t:"code",p:"Diamond: <em>A→B, A→C, B→D, C→D</em>. Print <em>D.__mro__</em>. Add print in each __init__ calling super().__init__(). Trace the initialization order — MRO determines it."},
+{t:"code",p:"LogMixin with a log(message) method. Mix into unrelated classes: <em>class LoggedAccount(BankAccount, LogMixin)</em>. Now BankAccount methods can call <em>self.log('...')</em>. Mixins add behavior without being a full parent."},
+]},
+{d:"Wed",t:"<strong>Comparison &amp; arithmetic dunders:</strong> <code>__eq__</code>, <code>__lt__</code>, <code>__hash__</code>, <code>__add__</code>, <code>__mul__</code>. Make your objects sortable and support operators.",time:"1.5 hrs",
+concepts:["__eq__","__hash__","__lt__","@total_ordering","__add__","__mul__"],
+pr:[
+{t:"code",p:"Add to BankAccount: <em>__eq__</em> (equal if same owner and balance), <em>__lt__</em> (compare by balance). Sort a list of accounts with sorted(). Put accounts in a set — explain why __hash__ is needed when you define __eq__."},
+{t:"code",p:"Build <em>Vector2D(x, y)</em> with: <em>__add__</em> (v1 + v2), <em>__mul__</em> (v * 3), <em>__rmul__</em> (3 * v), <em>__abs__</em> (magnitude). Test all combinations."},
+]},
+{d:"Thu",t:"<strong>Container dunders:</strong> <code>__len__</code>, <code>__getitem__</code>, <code>__contains__</code>, <code>__iter__</code>. Make your objects behave like containers.",time:"1.5 hrs",
+concepts:["__len__","__getitem__","__contains__","__iter__","custom containers"],
+pr:[
+{t:"code",p:"Add to Bank: <em>__len__</em> (account count), <em>__contains__</em> (<em>'Alice' in bank</em>), <em>__getitem__</em> (<em>bank['Alice']</em>), <em>__iter__</em> (for account in bank). Make the Bank class feel like a built-in container."},
+{t:"think",p:"Simplify __iter__: instead of tracking an index, just do <em>return iter(self._accounts.values())</em>. This delegates to dict's iterator. When would you need to implement __next__ yourself vs delegating like this?"},
+]},
+{d:"Fri",t:"<strong>Building rich objects:</strong> Combine multiple dunders to create a fully featured class.",time:"1.5 hrs",
+concepts:["rich comparison","@functools.total_ordering","__repr__","complete class design"],
+pr:[
+{t:"code",p:"Use <em>@functools.total_ordering</em>: define only __eq__ and __lt__, decorator auto-generates __le__, __gt__, __ge__. Verify all 6 comparison operators work on your BankAccount."},
+{t:"stretch",p:"Build <em>Money(amount, currency)</em>: add two Money of same currency (raise ValueError for different), multiply by a number, format as '$5.00' or '€3.50', full comparison operators, hashable."},
+]},
+],
+res:[
+{type:"book",name:"Fluent Python Ch. 1 — The Python Data Model",note:"Explains WHY dunder methods exist. Read after you've practiced them this week."},
+{type:"vid",name:"Corey Schafer — Inheritance (YouTube)",note:"Clear walkthrough with practical examples."},
+],
+ms:{icon:"🎲",name:"Card Game Engine",tag:"Inheritance, mixins, and a full dunder protocol",
+desc:"A card game engine demonstrating every OOP concept from this week.",
+specs:["Card with __str__, __repr__, __eq__, __lt__ (for comparison/sorting)","Deck: __len__, __contains__, __iter__, __getitem__, shuffle(), deal()","Hand(Deck) inherits from Deck, adds score calculation","Player and Dealer both inherit from GameParticipant","LogMixin adds move logging to both Player and Dealer","Playable game loop with win/loss detection"],
+deploy:"python card_game.py · terminal"},
+tips:[
+{title:"__eq__ kills __hash__",body:"If you define __eq__, Python sets __hash__ to None — instances become unhashable (can't go in sets or be dict keys). Restore with <em>__hash__ = ParentClass.__hash__</em> or implement your own."},
+{title:"Mixins are stateless",body:"Mixins should add methods, not store data. No __init__ saving attributes. They're for cross-cutting concerns: logging, serialization, validation. If a mixin needs state, it should be a proper class."},
+{title:"super() in MRO",body:"In multiple inheritance, super() calls the NEXT class in MRO, not the direct parent. Always call super().__init__(**kwargs) in cooperative inheritance — or some parents may not get initialized."},
+{title:"Java Bridge",body:"Java interface + implements = Python ABC (covered next week). Java extends = Python class Child(Parent). Java abstract method = Python @abstractmethod. Java multiple interface implementation = Python multiple inheritance."},
+]},
+
+{p:2,n:11,title:"Modern Python OOP & Type System",
+goal:"Eliminate boilerplate with dataclasses, enforce contracts with ABCs, validate data with Pydantic, and add correctness with type hints and mypy. These are the tools in every professional Python codebase.",
+builds_on:"Week 10: Inheritance and dunders — @dataclass auto-generates the dunders you wrote manually; ABCs formalize the 'must implement' pattern",
+leads_to:"Week 12: Generators and functional tools — these advanced features all use Python's data model internally",
+skip:"@dataclass ≈ Java 16 Records. ABC ≈ Java abstract class/interface. Pydantic has no Java equivalent — closer to Spring's Bean Validation but far more capable. Focus on all three.",
+hrs:"1.5",days:"5",tot:"~7",
+sched:[
+{d:"Mon",t:"<strong>@dataclass:</strong> Auto-generates <code>__init__</code>, <code>__repr__</code>, <code>__eq__</code>. <code>field()</code> for complex defaults. <code>frozen=True</code> for immutability.",time:"1.5 hrs",
+concepts:["@dataclass","field()","default_factory","frozen=True","__post_init__","slots=True"],
+pr:[
+{t:"code",p:"Convert BankAccount to @dataclass. Remove manual __init__, __repr__, __eq__. Add <em>field(default_factory=list)</em> for transactions. Add <em>__post_init__</em> that validates balance >= 0. Count lines saved."},
+{t:"code",p:"Make a frozen=True @dataclass for Transaction (immutable record). Add <em>slots=True</em> for memory efficiency. Compare memory of 100,000 instances with and without slots using tracemalloc."},
+]},
+{d:"Tue",t:"<strong>Abstract Base Classes:</strong> Force subclasses to implement required methods. Python's answer to Java interfaces.",time:"1.5 hrs",
+concepts:["ABC","@abstractmethod","abstract property","TypeError on incomplete","register()"],
+pr:[
+{t:"code",p:"Create <em>AbstractRepository(ABC)</em> with abstract: get(id), save(item), delete(id), list(). Implement InMemoryRepository with all four. Try creating AbstractRepository directly — verify TypeError."},
+{t:"code",p:"Create <em>Shape(ABC)</em> with abstract area() and perimeter(). Implement Circle, Rectangle, Triangle. Create a list of shapes and call area()/perimeter() on each — polymorphism working correctly."},
+]},
+{d:"Wed",t:"<strong>Type hints in depth:</strong> <code>Optional[T]</code>, <code>list[T]</code>, <code>dict[K,V]</code>, <code>Callable</code>, <code>Union</code>. Running mypy.",time:"1.5 hrs",
+concepts:["Optional","Union","list[T]","dict[K,V]","Callable","TypeVar","mypy --strict"],
+pr:[
+{t:"code",p:"Add full type hints to BankAccount: <em>def deposit(self, amount: float) -> None</em>, all properties typed, all class methods typed. Run <em>mypy --strict</em>. Fix every error until it passes clean."},
+{t:"code",p:"Type a function: <em>find_user(users: list[dict[str, str]], name: str) -> Optional[dict[str, str]]</em>. Type hints document what the function expects — they're better than a docstring alone."},
+]},
+{d:"Thu",t:"<strong>Pydantic v2:</strong> Runtime data validation, type coercion, structured error messages. Foundational for FastAPI.",time:"1.5 hrs",
+concepts:["BaseModel","@field_validator","@model_validator","model_dump","model_json"],
+pr:[
+{t:"code",p:"Create Pydantic <em>User</em>: name (str, min 2 chars), email (contains @), age (int, 0–150), is_active (bool, default True). Create invalid users and read the detailed error messages — Pydantic errors are excellent."},
+{t:"code",p:"Add @field_validator normalizing email to lowercase. Add @model_validator(mode='after') setting display_name to name if not provided. Serialize to dict and JSON. Round-trip: model → JSON → model."},
+]},
+{d:"Fri",t:"<strong>Protocols — structural typing:</strong> Define an interface without requiring inheritance. Duck typing made explicit and checkable.",time:"1.5 hrs",
+concepts:["Protocol","structural typing","duck typing","ABC vs Protocol","runtime_checkable"],
+pr:[
+{t:"code",p:"Define <em>Drawable(Protocol)</em> with <em>draw(self) -> str</em>. Write 3 unrelated classes each with draw() — none inherit from Drawable. Show all 3 satisfy the Protocol. No changes to existing classes needed."},
+{t:"think",p:"ABC vs Protocol: use ABC when subclasses explicitly opt in to your hierarchy. Use Protocol when any class with the right methods should work — including third-party code you can't modify. Which maps to Java interfaces?"},
+]},
+],
+res:[
+{type:"doc",name:"Python dataclasses — docs.python.org",note:"Complete docs. Understand every @dataclass parameter before moving on."},
+{type:"doc",name:"Pydantic v2 docs — pydantic.dev",note:"Validation and model config sections. This is used everywhere in FastAPI."},
+{type:"tool",name:"mypy — mypy-lang.org",note:"Run mypy --strict on all your code from this point forward."},
+],
+ms:{icon:"✅",name:"Validated Data Pipeline",tag:"@dataclass, ABCs, Pydantic, type hints",
+desc:"A data processing pipeline where every stage uses this week's modern Python type tools.",
+specs:["@dataclass RawRecord: input data with minimal structure","Pydantic ValidatedRecord: strict validation, type coercion, error reporting","AbstractProcessor(ABC): process(record) → result","Implementations: JSONProcessor, CSVProcessor, DatabaseProcessor (in-memory)","Full type hints throughout. mypy --strict passes clean.","Process 1000 records, report valid/invalid counts and errors clearly"],
+deploy:"python pipeline.py · mypy clean · ruff clean"},
+tips:[
+{title:"@dataclass vs Pydantic",body:"@dataclass: fast, stdlib, minimal validation, internal data. Pydantic: validation, coercion, errors, external-facing data. Rule: @dataclass internally, Pydantic for anything touching the outside world (API input/output)."},
+{title:"frozen=True",body:"@dataclass(frozen=True) makes instances immutable and hashable (usable as dict keys). Use for value objects: coordinates, money, config. Once created, they cannot change."},
+{title:"Type hints at runtime",body:"Type hints are checked by mypy/IDE — NOT enforced at runtime (unless you use Pydantic). def f(x: int) won't fail if you call f('hello'). Pydantic models ARE enforced at runtime."},
+{title:"Java Bridge",body:"@dataclass ≈ Java Records (Java 16+). Pydantic ≈ Java Bean Validation + Jackson. ABC ≈ Java abstract class or interface. Protocol has no Java equivalent — Java can't do structural typing without generics tricks."},
+]},
+
+{p:2,n:12,title:"Generators, Closures & Functional Python",
+goal:"Python's functional programming toolkit — generators for lazy evaluation, closures for stateful functions, and itertools/functools. These patterns appear constantly in professional code and are the building blocks of decorators (next week).",
+builds_on:"Week 4: Functions and first-class functions — closures are functions that remember their enclosing scope. Week 6: Lists — generators are lazy, memory-efficient lists",
+leads_to:"Week 13: Decorators and context managers — decorators ARE closures. Context managers use the same __enter__/__exit__ or @contextmanager patterns",
+skip:"Closures have no direct Java equivalent before Java 8 lambdas. Generators are like Java Streams but two-way (you can send values in). itertools is richer than Java Streams.",
+hrs:"1.5",days:"5",tot:"~7",
+sched:[
+{d:"Mon",t:"<strong>Closures:</strong> A function that remembers variables from its enclosing scope after the outer function returns. The foundation of decorators.",time:"1.5 hrs",
+concepts:["closure","nonlocal","enclosing scope","factory functions","stateful functions"],
+pr:[
+{t:"code",p:"Write <em>make_counter()</em>: returns a function that increments and returns a count each call. The count persists between calls — it's 'closed over'. Create two independent counters — each has its own count."},
+{t:"code",p:"Write <em>make_multiplier(n)</em>: returns a function multiplying its arg by n. Create <em>double = make_multiplier(2)</em>, <em>triple = make_multiplier(3)</em>. Each remembers its own n. This is EXACTLY how decorators work."},
+]},
+{d:"Tue",t:"<strong>Generator functions:</strong> Use <code>yield</code> to produce values lazily — one at a time on demand. Never loads all data into memory.",time:"1.5 hrs",
+concepts:["yield","generator function","generator object","lazy evaluation","memory efficiency"],
+pr:[
+{t:"code",p:"Write <em>read_large_file(path)</em>: yields one line at a time. Compare memory of reading 1M-line file with this generator vs readlines(). The generator stays flat — readlines() grows with file size."},
+{t:"think",p:"Difference: <em>[x**2 for x in range(10)]</em> creates all 10 values NOW. <em>(x**2 for x in range(10))</em> creates values on demand. Use sys.getsizeof on both — the generator object is tiny regardless of range size."},
+]},
+{d:"Wed",t:"<strong>yield from &amp; generator pipelines:</strong> Chain generators together. <code>yield from</code> delegates to another generator.",time:"1.5 hrs",
+concepts:["yield from","generator chaining","lazy pipelines","recursive generators"],
+pr:[
+{t:"code",p:"Lazy CSV pipeline: <em>read_rows(path)</em> yields lines, <em>parse_csv(rows)</em> yields dicts, <em>filter_rows(rows, **criteria)</em> yields matches. Chain: <em>filter_rows(parse_csv(read_rows(path)))</em>. Never loads the full file."},
+{t:"code",p:"Use yield from for recursive flatten: <em>yield from flatten(item)</em> when item is a list, else <em>yield item</em>. Flatten <em>[1,[2,[3,[4,5]]],6]</em> → <em>[1,2,3,4,5,6]</em>."},
+]},
+{d:"Thu",t:"<strong>itertools:</strong> <code>chain</code>, <code>islice</code>, <code>groupby</code>, <code>accumulate</code>, <code>combinations</code>, <code>permutations</code>, <code>product</code>.",time:"1.5 hrs",
+concepts:["chain","islice","groupby","accumulate","combinations","permutations"],
+pr:[
+{t:"code",p:"Use only itertools: (1) merge 3 lists without a new list (chain), (2) first 5 items from infinite generator (islice), (3) group sorted transactions by date (groupby), (4) running total of amounts (accumulate)."},
+{t:"code",p:"Combinatorics: all pairs from 10 items (combinations), all orderings of 4 items (permutations), all pairs from two lists (product). Count results without storing them."},
+]},
+{d:"Fri",t:"<strong>functools:</strong> <code>partial()</code>, <code>reduce()</code>, <code>lru_cache()</code>, <code>wraps()</code>. Memoization and function composition.",time:"1.5 hrs",
+concepts:["functools.partial","functools.reduce","functools.lru_cache","functools.wraps","memoization"],
+pr:[
+{t:"code",p:"@lru_cache(maxsize=128) on recursive Fibonacci. Add a call counter — measure how many fewer calls the cached version makes for fib(35). The difference is dramatic."},
+{t:"code",p:"Use partial: <em>add_tax = partial(calculate_price, tax_rate=0.1)</em>. Use reduce to implement function pipeline: <em>reduce(lambda acc, fn: fn(acc), [fn1, fn2, fn3], initial)</em>."},
+]},
+],
+res:[
+{type:"book",name:"Fluent Python Ch. 7 — Functions as First-Class Objects",note:"The best treatment of closures and first-class functions in Python."},
+{type:"vid",name:"David Beazley — Generator Tricks for Systems Programmers (PyCon 2008)",note:"Still the definitive generator resource. Watch this week."},
+{type:"doc",name:"Python itertools docs — docs.python.org/library/itertools",note:"Complete reference with recipes. The recipes section alone is worth the read."},
+],
+ms:{icon:"🔁",name:"Lazy Data Pipeline",tag:"Generators, closures, itertools — memory-efficient processing",
+desc:"A streaming data processor handling files too large to fit in RAM using lazy generators.",
+specs:["Read a large CSV lazily — never more than one row in memory at a time","Filter, transform, aggregate via chained generators","@lru_cache on lookup table functions for repeated lookups","itertools.groupby for grouping without loading all data","Pipeline statistics tracked via closures (count processed/skipped)","Process 100,000 rows in under 2 seconds, memory usage stays flat"],
+deploy:"python pipeline.py input.csv · memory stays flat"},
+tips:[
+{title:"Generator vs List",body:"If a function returns a list you only iterate once, make it a generator. Returning a list loads everything into memory. Yielding lets the caller decide whether to store or just iterate."},
+{title:"lru_cache limits",body:"@lru_cache only works on functions with hashable arguments — no lists or dicts as args. maxsize=None for unlimited cache, an integer to cap memory use."},
+{title:"groupby needs sorted input",body:"itertools.groupby groups CONSECUTIVE equal elements. If data isn't sorted by the group key, sort first — otherwise you get multiple groups for the same key."},
+{title:"Java Bridge",body:"Java Streams ≈ generator pipelines — lazy, chainable, one-pass. Key difference: Python generators are two-way (generator.send()) while Java Streams are one-way. Python's approach is lower-level but more flexible."},
+]},
+
+// ── PHASE 3 BACKEND DEV ─────────────────────────────────────
+{p:3,n:13,title:"Decorators, Context Managers & Concurrency",
+goal:"The three features that define professional Python. Decorators transform functions, context managers handle resources safely, and asyncio enables high-performance concurrent I/O. All three build directly on Weeks 4 and 12.",
+builds_on:"Week 12: Closures (decorators ARE closures). Week 4: First-class functions. Week 8: context managers — you already used the with statement",
+leads_to:"Week 14: FastAPI — every endpoint is async, decorators are used for routing, context managers manage DB sessions",
+skip:"No Java equivalents exist for decorators (Spring AOP is similar but far more complex). Context managers ≈ Java try-with-resources. AsyncIO ≈ CompletableFuture but built into the language.",
+hrs:"2",days:"5",tot:"~10",
+sched:[
+{d:"Mon",t:"<strong>Decorators from scratch:</strong> A decorator is a function that wraps another function. Built on closures. <code>@functools.wraps</code> preserves metadata.",time:"2 hrs",
+concepts:["decorator pattern","@syntax","functools.wraps","stacking","parameterized decorators"],
+pr:[
+{t:"code",p:"Build: <em>@timer</em> (logs execution time), <em>@retry(max=3, delay=0.5)</em> (retries on exception), <em>@memoize</em> (caches by args). Stack all three on one function. Trace which wrapper runs first."},
+{t:"code",p:"Build <em>@validate_types</em>: reads function annotations with inspect.signature(), raises TypeError if wrong types are passed. Test with correct and incorrect calls."},
+]},
+{d:"Tue",t:"<strong>Context managers:</strong> <code>__enter__</code>/<code>__exit__</code> for class-based managers. <code>@contextmanager</code> for function-based using yield.",time:"2 hrs",
+concepts:["__enter__/__exit__","@contextmanager","ExitStack","suppress","resource cleanup"],
+pr:[
+{t:"code",p:"Build a Timer context manager class: records elapsed time, exposed as t.elapsed. Use: <em>with Timer() as t: do_work(); print(t.elapsed)</em>. Must be reusable across multiple with blocks."},
+{t:"code",p:"Build <em>@contextmanager temp_file(suffix)</em>: creates a temp file, yields its path, deletes in finally. Verify file is created during the block and deleted after — even if an exception occurs inside."},
+]},
+{d:"Wed",t:"<strong>The GIL &amp; threading:</strong> Why threading helps I/O-bound work but not CPU-bound. Thread safety and locks.",time:"2 hrs",
+concepts:["GIL","threading","Lock","ThreadPoolExecutor","I/O vs CPU bound","race condition"],
+pr:[
+{t:"code",p:"CPU test: count primes to 500k — run in 1 thread vs 4 threads, time both. Similar time (GIL blocks parallel CPU work). I/O test: read 100 files — 1 thread vs 4 threads. 4 threads is much faster. Explain why."},
+{t:"code",p:"Race condition: two threads increment a shared counter 100,000 times without a lock — wrong result. Add threading.Lock — correct result. Measure the overhead the lock adds."},
+]},
+{d:"Thu",t:"<strong>AsyncIO — async/await:</strong> Event loop, coroutines, gather, create_task. Connection to generators: await is yield from with better syntax.",time:"2 hrs",
+concepts:["async def","await","event loop","asyncio.gather","create_task","asyncio.Queue"],
+pr:[
+{t:"think",p:"Before writing code: understand that <em>await asyncio.sleep(1)</em> suspends YOUR coroutine and gives the event loop control. The loop runs other coroutines. After 1 second it resumes yours. This is generator.send() with better syntax."},
+{t:"code",p:"5 coroutines each sleep 1 second (simulating I/O). Run (1) sequentially — takes 5 seconds. (2) with asyncio.gather — takes 1 second. The difference is dramatic. Explain why."},
+{t:"code",p:"Async producer/consumer: producer adds 100 items to asyncio.Queue, 3 consumers process concurrently. Use asyncio.create_task. Print which consumer handles which item."},
+]},
+{d:"Fri",t:"<strong>Advanced asyncio:</strong> <code>Semaphore</code> for rate limiting, <code>wait_for</code> for timeouts, <code>aiohttp</code> for async HTTP.",time:"2 hrs",
+concepts:["Semaphore","wait_for","aiohttp","async context managers","TaskGroup"],
+pr:[
+{t:"code",p:"Fetch 20 URLs concurrently with aiohttp, max 5 at a time using asyncio.Semaphore. Add 3-second timeout with asyncio.wait_for. Print which succeeded and which timed out."},
+{t:"stretch",p:"Async retry: <em>async def fetch_with_retry(url, max_attempts=3)</em>. On failure, wait 2^attempt seconds (exponential backoff). Test against a URL that fails the first 2 times then succeeds."},
+]},
+],
+res:[
+{type:"book",name:"Fluent Python Ch. 9 — Decorators and Closures",note:"Best treatment of Python decorators. Read after building yours from scratch."},
+{type:"book",name:"Using AsyncIO in Python — Caleb Hattingh (O'Reilly)",note:"Concise and practical. Read alongside the async exercises this week."},
+{type:"vid",name:"David Beazley — Fear and Awaiting in Async (PyCon 2016)",note:"Live-codes asyncio from scratch. Makes the generator→coroutine link explicit."},
+],
+ms:{icon:"🌐",name:"Async URL Health Checker",tag:"Decorators + context managers + asyncio combined",
+desc:"An async service checking the health of many URLs concurrently, using decorators for retry logic and a context manager for cleanup.",
+specs:["Fetch up to 500 URLs concurrently, max 10 at a time (Semaphore)","@retry(max=3, backoff=2) decorator on each fetch","@timer decorator on the main function","ResultsManager context manager: sets up, yields results dict, saves to JSON on exit","Report: success count, failure count, p50/p95 response times","Deploy as systemd timer checking your homelab services every 5 minutes"],
+deploy:"python health_check.py · systemd timer · results.json"},
+tips:[
+{title:"Decorator is sugar",body:"<em>@my_decorator\\ndef f(): ...</em> is exactly <em>f = my_decorator(f)</em>. The @ is syntactic sugar. When confused, expand to the function-call form and trace through manually."},
+{title:"with for resources",body:"Any resource needing cleanup (files, DB connections, locks, HTTP sessions) belongs in a context manager. If you're writing try/finally for cleanup, refactor it to a context manager."},
+{title:"Blocking in async",body:"NEVER call blocking functions inside async: time.sleep, requests.get, file reads. They block the entire event loop, freezing all coroutines. Use asyncio.sleep, aiohttp, aiofiles instead."},
+{title:"Java Bridge",body:"Python @decorator ≈ Spring AOP @Aspect but far simpler. Python 'with' ≈ Java try-with-resources. Python asyncio ≈ Java CompletableFuture/virtual threads but built into the language and idiomatic."},
+]},
+
+{p:3,n:14,title:"FastAPI — Building REST APIs",
+goal:"Build production-quality APIs. FastAPI connects everything: Pydantic from Week 11 for request/response models, async from Week 13 for performance, decorators for routing, type hints throughout. This is where Python skills become a deployable backend.",
+builds_on:"Week 13: async/await (every FastAPI endpoint is async). Week 11: Pydantic (every request/response is a Pydantic model). Week 12: decorators (@app.get uses decorator syntax)",
+leads_to:"Week 15: SQLAlchemy — plug a real database into the API you build this week",
+skip:"FastAPI is Spring MVC but: Pydantic instead of Jackson, DI via function parameters instead of @Autowired, no XML config. Every concept has a Spring parallel — we name them throughout.",
+hrs:"2",days:"5",tot:"~10",
+sched:[
+{d:"Mon",t:"<strong>FastAPI basics:</strong> Routes, path params, query params, response models, auto-generated /docs.",time:"2 hrs",
+concepts:["@app.get","path params","query params","response_model","status_code","/docs OpenAPI"],
+pr:[
+{t:"code",p:"Create GET /items/{item_id} with path param, skip=0 and limit=10 query params, Pydantic response model. Hit with curl. Open /docs — OpenAPI UI is auto-generated from your code."},
+{t:"code",p:"Add POST /items (JSON body, returns 201 + Location header), DELETE /items/{id} (returns 204). Verify all three in the /docs UI without writing any documentation manually."},
+]},
+{d:"Tue",t:"<strong>Pydantic request/response models:</strong> Separate input and output models. response_model strips extra fields — preventing data leaks.",time:"2 hrs",
+concepts:["request model","response model","@field_validator","@model_validator","model_fields_set"],
+pr:[
+{t:"code",p:"Build TaskCreate (all required), TaskUpdate (all optional for PATCH), TaskResponse (adds id, created_at). Show response_model strips fields not in TaskResponse — preventing accidental data exposure."},
+{t:"code",p:"Add validation: due_date must be future (@field_validator), completed tasks need completed_at (@model_validator). Test valid and invalid inputs. Read the auto-generated error messages — they're excellent."},
+]},
+{d:"Wed",t:"<strong>Dependency Injection:</strong> <code>Depends()</code> for shared logic. Sub-dependencies. Yield-based dependencies.",time:"2 hrs",
+concepts:["Depends()","sub-dependencies","yield deps","dependency override","DI graph"],
+pr:[
+{t:"code",p:"Build CommonQueryParams (skip, limit, sort_by) as Depends(). Inject into 3 endpoints. Change the default in one place — all 3 update. This is Spring @Autowired but resolved per-request."},
+{t:"code",p:"Yield-based get_db: create → yield → close in finally. Chain get_current_user(db=Depends(get_db)) on top. Override in tests to return a fixture user without needing a real JWT."},
+]},
+{d:"Thu",t:"<strong>Middleware &amp; error handling:</strong> Request middleware, global exception handlers, structured errors.",time:"2 hrs",
+concepts:["middleware","HTTPException","global exception handler","CORS","request_id"],
+pr:[
+{t:"code",p:"Middleware that adds X-Request-ID (UUID4) to every request and response. Store in ContextVar. Inject into every log line from that request."},
+{t:"code",p:"Global handlers: ValueError→422, IntegrityError→409. Both return RFC 7807 Problem Details JSON — no stack traces in the response. Add CORS middleware for local dev."},
+]},
+{d:"Fri",t:"<strong>Background tasks &amp; streaming:</strong> Non-blocking post-response processing. Streaming large responses.",time:"2 hrs",
+concepts:["BackgroundTasks","StreamingResponse","file upload","async generators"],
+pr:[
+{t:"code",p:"BackgroundTasks audit log: fires AFTER response is sent — doesn't slow the client. Verify by timing: response returns before the log is written."},
+{t:"stretch",p:"GET /export/csv streaming 100,000 rows via StreamingResponse and an async generator. Verify with curl that data starts arriving before the full export completes."},
+]},
+],
+res:[
+{type:"doc",name:"FastAPI Official Docs — fastapi.tiangolo.com",note:"Read every tutorial page. Best framework documentation in the Python ecosystem."},
+{type:"repo",name:"fastapi-best-practices — github.com/zhanymkanov",note:"Community production patterns. Bookmark and revisit weekly."},
+{type:"tool",name:"httpx + pytest-asyncio",note:"Your testing stack. httpx.AsyncClient for integration tests against your running FastAPI app."},
+],
+ms:{icon:"📋",name:"Task Management REST API",tag:"Full CRUD with DI, validation, middleware, auto-docs",
+desc:"Your first real FastAPI backend — built correctly from day one with layered architecture.",
+specs:["Users → Projects → Tasks → Comments (nested routers)","Separate TaskCreate, TaskUpdate, TaskResponse Pydantic models","DI: get_db(), get_current_user(), pagination_params()","Global error handlers: RFC 7807 Problem Details JSON","Request ID middleware + structured JSON logging","pytest integration tests using httpx.AsyncClient","Docker Compose: app + postgres"],
+deploy:"Docker Compose · homelab · api.home.lab · /docs available"},
+tips:[
+{title:"Java Bridge",body:"@app.get('/items') ≈ Spring @GetMapping. Depends() ≈ @Autowired per-request. Pydantic model ≈ @RequestBody DTO. response_model ≈ @JsonView. HTTPException ≈ ResponseStatusException."},
+{title:"Separate input/output",body:"Always separate TaskCreate (input) from TaskResponse (output). They look similar but diverge: input validates user data; output includes server-generated fields (id, timestamps). Mixing them causes data leaks."},
+{title:"DI for everything shared",body:"DB sessions, current user, pagination, config — inject all via Depends(). Never create shared resources inside route handlers. This makes testing trivial and routes clean."},
+{title:"Auto docs",body:"FastAPI generates OpenAPI at /docs (Swagger) and /redoc automatically. Every Pydantic field, validator, and example appears there instantly. It's your API's living documentation."},
+]},
+
+{p:3,n:15,title:"SQLAlchemy, Alembic & Auth",
+goal:"Add a real database and production authentication. SQLAlchemy 2.0 for async database access, Alembic for migrations (same discipline as Flyway), and JWT-based auth with RBAC. By end of this week, your API is a real production backend.",
+builds_on:"Week 14: FastAPI DI (database session is a yield-based dependency). Week 11: Pydantic (repository inputs/outputs are Pydantic models). Week 9: classes (SQLAlchemy models are classes)",
+leads_to:"Week 16: Testing, CI/CD, Docker — your now-complete backend gets hardened for production",
+skip:"SQLAlchemy Session ≈ JPA EntityManager. Alembic ≈ Flyway. JWT auth ≈ Spring Security JWT filter. N+1 problem is identical to Hibernate's — and the fix is the same.",
+hrs:"2",days:"5",tot:"~10",
+sched:[
+{d:"Mon",t:"<strong>SQLAlchemy 2.0 basics:</strong> Declarative models with <code>Mapped[T]</code>, async session, CRUD queries.",time:"2 hrs",
+concepts:["DeclarativeBase","Mapped[T]","mapped_column","AsyncSession","select()","asyncpg"],
+pr:[
+{t:"code",p:"Define User, Project, Task using Mapped[T] annotations. Add created_at with server_default=func.now(). Run Alembic autogenerate — review the SQL. Apply to Postgres. Verify in psql."},
+{t:"code",p:"Async CRUD: create a user, fetch by ID, update name, delete. Each in its own async function injected via Depends(). Test all four with httpx."},
+]},
+{d:"Tue",t:"<strong>Relationships &amp; the N+1 problem:</strong> One-to-many, many-to-many. Eager loading to prevent N+1.",time:"2 hrs",
+concepts:["relationship()","ForeignKey","selectinload","joinedload","N+1","EXPLAIN ANALYZE"],
+pr:[
+{t:"code",p:"Add User→Projects (1:N) and Project→Tasks (1:N). Demonstrate N+1: load 10 projects, print task counts without eager loading (echo=True shows queries). Fix with selectinload. Count queries before/after."},
+{t:"fix",p:"This raises MissingGreenlet in async: <em>for task in project.tasks</em>. Explain why (async SQLAlchemy has no implicit lazy loading). Fix by loading tasks eagerly with selectinload at query time."},
+]},
+{d:"Wed",t:"<strong>Alembic &amp; Repository pattern:</strong> Every schema change goes through Alembic. Repository separates database logic from business logic.",time:"2 hrs",
+concepts:["alembic autogenerate","upgrade/downgrade","data migration","BaseRepository","generic CRUD"],
+pr:[
+{t:"code",p:"Add priority column to Task. Generate migration, review SQL, apply, rollback with alembic downgrade -1, reapply. Write a data migration setting priority=1 for tasks with 'urgent' in the title."},
+{t:"code",p:"Build BaseRepository[T] with async get, list, create, update, delete. TaskRepository extends it with filter_by_status. Write 5 pytest tests with in-memory SQLite — no Postgres needed."},
+]},
+{d:"Thu",t:"<strong>JWT Authentication:</strong> Access + refresh tokens, rotation, get_current_user dependency.",time:"2 hrs",
+concepts:["JWT","access token","refresh token","rotation","python-jose","argon2"],
+pr:[
+{t:"code",p:"Implement JWT: create_access_token (15min), verify_token, get_current_user dependency. Hash passwords with argon2. Test: login → token → use token → token expires → 401."},
+{t:"code",p:"Refresh token rotation: store hashed refresh tokens in DB, /auth/refresh validates rotates and issues new pair. Implement reuse detection: used token reused → revoke ALL user tokens."},
+]},
+{d:"Fri",t:"<strong>RBAC &amp; security hardening:</strong> Role-based access, rate limiting, security headers.",time:"2 hrs",
+concepts:["RBAC","Permission enum","slowapi","security headers","CORS hardening","argon2"],
+pr:[
+{t:"code",p:"RBAC: Permission enum, ROLE_PERMISSIONS dict, require_permission(Permission.DELETE_TASK) dependency factory. Test: viewer can GET, cannot POST, cannot DELETE."},
+{t:"code",p:"Add slowapi: 5 login attempts/min per IP. Security headers middleware: HSTS, X-Frame-Options, X-Content-Type-Options. Strict CORS: enumerate exact origins, no wildcard."},
+]},
+],
+res:[
+{type:"doc",name:"SQLAlchemy 2.0 Docs — docs.sqlalchemy.org",note:"ORM Quick Start, Declarative Mapping, Relationships. Read all three."},
+{type:"doc",name:"Alembic Docs — alembic.sqlalchemy.org",note:"Autogenerate, async support, cookbook sections."},
+{type:"doc",name:"FastAPI Security — fastapi.tiangolo.com/tutorial/security",note:"Read every security page. Then reread."},
+],
+ms:{icon:"🔐",name:"Authenticated Task API",tag:"FastAPI + SQLAlchemy + JWT + RBAC — full stack",
+desc:"The Week 14 API now has a real PostgreSQL database and production authentication.",
+specs:["Async SQLAlchemy 2.0 + asyncpg. Alembic auto-runs on startup.","BaseRepository[T] + TaskRepository + UserRepository","JWT: 15-min access + 7-day refresh with rotation and reuse detection","RBAC: admin, member, viewer — fine-grained per-endpoint permissions","Rate limiting: 5 logins/min, 100 requests/min","Security headers, strict CORS, argon2 password hashing","Full pytest suite: unit + integration"],
+deploy:"Docker Compose · PostgreSQL 16 · homelab · HTTPS via nginx"},
+tips:[
+{title:"N+1 is your enemy",body:"Loading N records and making 1 additional query per record = N+1 queries. 100 projects = 101 DB round trips. Fix: always use selectinload() or joinedload() for relationships you'll access."},
+{title:"Never store plaintext",body:"Hash passwords with argon2. Hash refresh tokens with SHA-256 — store only the hash. If your DB is leaked, hashes protect users. Plaintext passwords = instant full compromise."},
+{title:"JWT is not a session",body:"JWTs can't be revoked (stateless). Access tokens must be SHORT-LIVED (15 minutes). Refresh tokens must be stored in DB so they CAN be revoked when compromised."},
+{title:"Java Bridge",body:"SQLAlchemy Session = JPA EntityManager. Alembic = Flyway. JWT filter = Spring Security OncePerRequestFilter. RBAC via DI = Spring @PreAuthorize. Concepts identical, implementation more explicit."},
+]},
+
+{p:3,n:16,title:"Testing, CI/CD & Docker",
+goal:"Professional testing pyramid, automated pipeline, Docker deployment. Your API from Weeks 14–15 becomes a tested, auto-deployed production service. 'It works on my machine' becomes 'it works everywhere'.",
+builds_on:"Weeks 14–15: A complete FastAPI + SQLAlchemy + Auth backend worth testing and deploying",
+leads_to:"Week 17: Real-time features (WebSockets, Celery) built on top of a properly hardened, deployed base",
+skip:"pytest fixtures ≈ JUnit @BeforeEach but composable. Docker concepts are language-agnostic. CI/CD pipeline structure is the same as any GitHub Actions workflow.",
+hrs:"2",days:"5",tot:"~10",
+sched:[
+{d:"Mon",t:"<strong>pytest mastery:</strong> Fixtures, parametrize, conftest.py, pytest-asyncio, coverage.",time:"2 hrs",
+concepts:["fixtures","conftest.py","parametrize","asyncio_mode","pytest-cov","fixture scope"],
+pr:[
+{t:"code",p:"Build conftest.py: app (session scope), async_session (function), test_client (function), authenticated_client (function, injects JWT), seed_tasks (function). Each fixture depends on the right parents."},
+{t:"code",p:"@pytest.mark.parametrize: test TaskCreate with 10 cases (valid, missing field, wrong type, past date, empty string, boundary). One function, 10 scenarios — same as JUnit @ParameterizedTest."},
+]},
+{d:"Tue",t:"<strong>Integration &amp; E2E testing:</strong> Full-stack via httpx. Database rollback between tests.",time:"2 hrs",
+concepts:["httpx.AsyncClient","dependency overrides","transaction rollback","E2E flow"],
+pr:[
+{t:"code",p:"One integration test: create user → login → create project → create 5 tasks → update one → delete one → verify final state. All via HTTP. ~35 lines of clear readable test code."},
+{t:"fix",p:"Tests leave data between runs. Fix: wrap each test in session.begin_nested(), rollback at teardown. Verify with row counts before and after each test. ≈ Spring's @Transactional(rollback=true)."},
+]},
+{d:"Wed",t:"<strong>Mocking:</strong> pytest-mock, respx for HTTP mocking. When to mock vs when not to.",time:"2 hrs",
+concepts:["pytest-mock","respx","mocker.patch","when to mock","contract vs unit"],
+pr:[
+{t:"code",p:"Mock send_notification with pytest-mock. Verify it's called with right args after task assignment. No real notification sent. Map to Mockito's verify(mock).method(args)."},
+{t:"think",p:"Name 3 things you should NOT mock (real DB behavior, real crypto, real file I/O) and 3 you MUST mock (email, payment, external API). Rule: mock things outside your control; test real behavior everywhere else."},
+]},
+{d:"Thu",t:"<strong>Docker production:</strong> Multi-stage builds, non-root user, health checks, Trivy scanning.",time:"2 hrs",
+concepts:["multi-stage","python:3.12-slim","non-root UID 1000","HEALTHCHECK","trivy","dockerignore"],
+pr:[
+{t:"code",p:"Multi-stage Dockerfile: stage 1 installs deps with uv, stage 2 copies venv into python:3.12-slim. Under 150MB. Non-root user UID 1000. HEALTHCHECK on /health."},
+{t:"code",p:"Run trivy image your-app:latest. Fix every CRITICAL and HIGH CVE. Add .dockerignore excluding tests, .git, __pycache__, *.pyc. Verify non-root: docker exec ... whoami"},
+]},
+{d:"Fri",t:"<strong>CI/CD pipeline:</strong> GitHub/Gitea Actions: lint → typecheck → test → build → push → deploy.",time:"2 hrs",
+concepts:["GitHub Actions","ruff","mypy","coverage gate","registry push","auto-deploy","rollback"],
+pr:[
+{t:"code",p:"Workflow: on PR → ruff lint → mypy → pytest with coverage (fail under 75%). On merge to main → build Docker → push to registry → SSH homelab → docker compose up -d."},
+{t:"stretch",p:"Rollback: if health check fails 30s after deploy, re-tag previous image as :latest and redeploy. Test by pushing a deliberately broken image. Real production deploy strategy."},
+]},
+],
+res:[
+{type:"doc",name:"pytest docs — docs.pytest.org",note:"Fixtures, parametrize, plugins. Read the fixture section twice."},
+{type:"doc",name:"Docker multi-stage builds — docs.docker.com",note:"Python-specific patterns. python:3.12-slim as the final stage."},
+{type:"vid",name:"TechWorld with Nana — GitHub Actions (YouTube)",note:"Practical CI/CD translating directly to Gitea Actions syntax."},
+],
+ms:{icon:"🏭",name:"Production Task API",tag:"Full test pyramid + CI/CD + auto-deploy to homelab",
+desc:"The complete API from Weeks 14–15 hardened with testing, CI/CD, and Docker deployment.",
+specs:["50+ unit tests, 20+ integration tests, 5+ E2E tests","Coverage gate in CI: build fails under 75%","Multi-stage Dockerfile: non-root, slim, <150MB, trivy clean","Pipeline: ruff → mypy → pytest → build → push → deploy","Docker Compose: healthchecks, restart policies, resource limits","Alembic migrations run automatically in deploy pipeline","Auto-deploy on every merge to main"],
+deploy:"Full CI/CD · auto-deploy homelab · health monitoring"},
+tips:[
+{title:"Test behavior",body:"Test what your API RETURNS, not how SQLAlchemy builds the query. Tests that break during refactoring are testing implementation details, not behavior. A good test suite survives internal rewrites."},
+{title:"Docker non-root",body:"Final image must run as UID 1000. Pin base image to a digest in production. Never :latest in a Dockerfile — it's non-deterministic. Pin everything."},
+{title:"CI cache",body:"Cache uv/pip dependencies between CI runs. Without caching: 3 minutes installing deps per run. With warm cache: under 10 seconds. Measure your pipeline and optimize it."},
+{title:"Java Bridge",body:"pytest fixtures ≈ JUnit @BeforeEach/@AfterEach but composable (fixtures depend on fixtures). pytest parametrize ≈ JUnit @ParameterizedTest. Docker concepts are language-agnostic."},
+]},
+
+// ── PHASE 4 PRODUCTION ───────────────────────────────────────
+{p:4,n:17,title:"WebSockets, Celery & Redis",
+goal:"Real-time features and background task processing. Users receive live notifications via WebSocket when tasks change. Heavy work offloads to Celery workers so the API stays fast.",
+builds_on:"Week 16: A tested, deployed API to add real-time features to. Week 13: asyncio (WebSockets are async). Week 12: generators (similar lazy evaluation patterns to Celery)",
+leads_to:"Week 18: Caching and observability — real-time systems surface performance bottlenecks that caching and metrics can solve",
+skip:"Celery ≈ Spring @Async + Spring Batch but in separate processes. WebSocket protocol is the same as Spring WebSocket. Redis pub/sub has no Spring equivalent.",
+hrs:"1.5",days:"5",tot:"~8",
+sched:[
+{d:"Mon",t:"<strong>WebSockets in FastAPI:</strong> Connection manager, broadcast, rooms, auth.",time:"1.5 hrs",
+concepts:["WebSocket","ConnectionManager","broadcast","rooms","close codes","heartbeat"],
+pr:[
+{t:"code",p:"Build /ws/chat/{room_id} with ConnectionManager tracking connections per room. Test with two websocat terminals. Verify messages only reach the right room."},
+{t:"code",p:"Add WebSocket auth: JWT as ?token= query param. Validate before accepting. Reject invalid tokens with close code 4001. Test with valid and invalid tokens."},
+]},
+{d:"Tue",t:"<strong>Server-Sent Events:</strong> One-way streaming from server to client. When to use SSE vs WebSocket.",time:"1.5 hrs",
+concepts:["SSE","EventSourceResponse","Last-Event-ID","reconnection","SSE vs WebSocket"],
+pr:[
+{t:"code",p:"GET /stream/notifications as SSE. Each event is JSON with data: and event: fields. Test with curl -N. Add Last-Event-ID support so clients don't miss events on reconnect."},
+{t:"think",p:"SSE vs WebSocket: SSE works through HTTP proxies, is one-way only, auto-reconnects. WebSocket is bidirectional. Map each to a use case where it's the clearly better choice."},
+]},
+{d:"Wed",t:"<strong>Redis + Celery setup:</strong> Celery as task queue, Redis as broker, basic tasks, Flower dashboard.",time:"1.5 hrs",
+concepts:["Celery","Redis broker","@app.task","delay()","apply_async","canvas","Flower"],
+pr:[
+{t:"code",p:"Create send_notification.delay(user_id, message). Call from a FastAPI endpoint. Verify it runs in a separate worker process (different PID). Monitor in Flower."},
+{t:"code",p:"Build a task chain: validate.si(data) | process.s() | save.s(). Test success path and a failure in the middle task. Observe how Celery handles partial chain failure."},
+]},
+{d:"Thu",t:"<strong>Celery patterns:</strong> Retry, periodic tasks with celery beat, task deduplication.",time:"1.5 hrs",
+concepts:["retry","exponential backoff","celery beat","deduplication","Redis SETNX"],
+pr:[
+{t:"code",p:"Retry with exponential backoff: @app.task(bind=True, max_retries=3) using self.retry(countdown=2**self.request.retries). Make it fail 2 times deliberately, then succeed. Verify in Flower."},
+{t:"code",p:"Celery beat: cleanup_expired_tokens every hour, daily_digest at 8am UTC. Task deduplication: prevent same task queuing twice in 60s using Redis SETNX with TTL."},
+]},
+{d:"Fri",t:"<strong>Redis pub/sub bridge:</strong> FastAPI publishes events, Celery workers subscribe and process.",time:"1.5 hrs",
+concepts:["Redis pub/sub","event bridge","async publish","worker subscribe","round-trip latency"],
+pr:[
+{t:"code",p:"Full pipeline: assign task → FastAPI publishes Redis event → Celery worker receives → sends notification → WebSocket pushes to user. Time full round trip. Target: under 200ms."},
+{t:"code",p:"Deploy Flower at flower.home.lab. Add lifespan: retry Redis connection with exponential backoff if not ready on startup."},
+]},
+],
+res:[
+{type:"doc",name:"Celery docs — docs.celeryq.dev",note:"Getting Started, Tasks, Canvas, Routing. Read all four."},
+{type:"doc",name:"FastAPI WebSockets — fastapi.tiangolo.com/advanced/websockets",note:"Official guide + connection manager pattern examples."},
+{type:"tool",name:"websocat — CLI WebSocket client",note:"Like curl for WebSockets. websocat ws://localhost:8000/ws"},
+],
+ms:{icon:"📡",name:"Real-Time Notification System",tag:"WebSocket + SSE + Celery + Redis pub/sub",
+desc:"Task assignments and completions push live to users. Heavy work offloads to Celery.",
+specs:["WebSocket ConnectionManager: per-user connections, broadcast to project members","SSE fallback for clients without WebSocket","Celery: email notification + unread badge count update","Redis pub/sub bridge between FastAPI and workers","Celery Beat: daily digest + cleanup jobs","Flower dashboard at flower.home.lab"],
+deploy:"Docker Compose · Redis · Celery · Flower · homelab"},
+tips:[
+{title:"Celery idempotency",body:"Every Celery task must be idempotent — running it twice produces the same result as once. Networks are unreliable and tasks WILL be retried. Non-idempotent tasks cause duplicate data on retry."},
+{title:"WebSocket reconnection",body:"Always implement client-side reconnection with exponential backoff. Servers restart, networks drop, load balancers timeout. Clients that don't reconnect silently stop receiving updates."},
+{title:"SSE vs WebSocket choice",body:"SSE: server-to-client only, HTTP proxy friendly, auto-reconnect built in. WebSocket: bidirectional, lower latency, binary data support. Choose based on whether you need to send data FROM the client in real time."},
+{title:"Java Bridge",body:"Celery tasks ≈ Spring @Async + Spring Batch in separate processes. Redis pub/sub has no Spring equivalent — closest is Spring ApplicationEvents but in-process only. Celery Beat ≈ Spring @Scheduled."},
+]},
+
+{p:4,n:18,title:"Caching, Performance & Observability",
+goal:"Make your services fast and visible. Redis caching for sub-5ms responses, profiling to find real bottlenecks, structured logging, Prometheus metrics, and distributed tracing. You can't operate what you can't see.",
+builds_on:"Week 17: Redis already deployed for Celery — now also use it for caching. Week 13: asyncio for all async cache operations. Week 15: database layer (most performance bottlenecks are DB queries)",
+leads_to:"Week 19: Python internals — understanding performance deeply requires knowing how CPython works. Week 20: Capstone uses all observability tools",
+skip:"Redis caching ≈ Spring @Cacheable with Redis backend. Prometheus ≈ Micrometer. OpenTelemetry is the SAME spec as Java — same W3C traceparent headers, same OTLP protocol, just a different SDK.",
+hrs:"1.5",days:"5",tot:"~8",
+sched:[
+{d:"Mon",t:"<strong>Redis caching:</strong> Cache-aside, TTL, stampede prevention, invalidation strategy.",time:"1.5 hrs",
+concepts:["cache-aside","TTL","stampede","SETNX lock","X-Cache header","invalidation"],
+pr:[
+{t:"code",p:"Cache-aside on your most expensive endpoint: check Redis first, on miss fetch DB and populate. Add X-Cache: HIT/MISS header. Measure: cached responses should be under 5ms."},
+{t:"code",p:"Stampede protection: when cache is empty, one request wins SETNX lock and populates; others wait briefly then read. Simulate with 50 concurrent requests — without protection they all hit DB simultaneously."},
+]},
+{d:"Tue",t:"<strong>Profiling — find real bottlenecks:</strong> pyinstrument, scalene, EXPLAIN ANALYZE.",time:"1.5 hrs",
+concepts:["pyinstrument","scalene","cProfile","EXPLAIN ANALYZE","index strategy","benchmark workflow"],
+pr:[
+{t:"code",p:"Profile heaviest endpoint with pyinstrument -r html under load. Find top 3 slowest functions. Fix 2 of them. Document: what was slow, what changed, what improved. Always measure before and after."},
+{t:"code",p:"Find slow SQL queries with EXPLAIN ANALYZE. Add missing indexes. Verify each switches from Seq Scan to Index Scan. Record mean query time before and after each index addition."},
+]},
+{d:"Wed",t:"<strong>Structured logging:</strong> structlog for JSON output, request ID propagation, log levels.",time:"1.5 hrs",
+concepts:["structlog","JSON logging","ContextVar propagation","log levels","PII in logs"],
+pr:[
+{t:"code",p:"Configure structlog: JSON output with timestamp, level, request_id, user_id, path, method, status_code, duration_ms. Verify with jq — every field present on every request."},
+{t:"think",p:"Three bad log statements: (1) logging a password in an error handler, (2) DEBUG in a hot path called 1000x/sec, (3) log.info('User: ' + str(user)). Explain each problem. What NEVER goes in logs?"},
+]},
+{d:"Thu",t:"<strong>Prometheus + OpenTelemetry:</strong> Metrics and distributed traces.",time:"1.5 hrs",
+concepts:["prometheus-fastapi-instrumentator","Counter","Histogram","Gauge","OpenTelemetry","Jaeger"],
+pr:[
+{t:"code",p:"Add prometheus-fastapi-instrumentator. Verify /metrics. Add custom: tasks_created_total (Counter), active_websockets (Gauge), db_query_duration_seconds (Histogram). Deploy Prometheus + Grafana on homelab."},
+{t:"code",p:"Add OpenTelemetry auto-instrumentation. Verify traces with spans for: route, middleware, DB query. Deploy Jaeger on homelab. Find a slow DB span and fix it using Week 15 knowledge."},
+]},
+{d:"Fri",t:"<strong>Alerting &amp; SLOs:</strong> AlertManager rules, SLO definition, error budget, runbooks.",time:"1.5 hrs",
+concepts:["AlertManager","SLO","error budget","burn rate","runbook"],
+pr:[
+{t:"code",p:"3 alert rules: error rate > 1% for 5min, p99 > 500ms for 3min, Celery queue depth > 100. Test each by triggering the condition. Configure alerts to send to a webhook."},
+{t:"think",p:"Write 2 runbooks: (1) high error rate fires — what to check first, second, third, how to mitigate. (2) latency spike — profiling steps, common root causes, rollback decision. These are real on-call documents."},
+]},
+],
+res:[
+{type:"doc",name:"Redis docs — redis.io/docs",note:"Data types, caching patterns, Pub/Sub. Know the commands cold."},
+{type:"tool",name:"pyinstrument",note:"Best async-aware profiler. pyinstrument -r html -o profile.html script.py"},
+{type:"repo",name:"prometheus-fastapi-instrumentator — GitHub",note:"Drop-in Prometheus metrics. Read source to understand what it exposes by default."},
+{type:"book",name:"Observability Engineering — Charity Majors (O'Reilly)",note:"Conceptual foundation. Not Python-specific but essential reading."},
+],
+ms:{icon:"📊",name:"Observable Cached API",tag:"Redis + Prometheus + Grafana + Jaeger + AlertManager",
+desc:"Your API platform is now fast (caching), measurable (metrics), and debuggable (traces).",
+specs:["L1: in-process lru_cache for reference data. L2: Redis TTL for expensive queries.","Celery async cache invalidation on every write","Grafana dashboard: request rate, latency, cache hit rate, error rate","Jaeger: distributed traces for all services","AlertManager: SLO-based alerts with notification","Runbooks: 2 documented diagnosis workflows","Load test: 500 concurrent users, p99 < 200ms"],
+deploy:"Full LGTM stack on homelab · Grafana at grafana.home.lab"},
+tips:[
+{title:"Profile first",body:"Your intuition about bottlenecks will be wrong 70% of the time. ALWAYS profile before optimizing. ALWAYS measure after optimizing. Never skip either step."},
+{title:"Cache invalidation",body:"When data changes, the cache must be invalidated — not just expired. Build invalidation into every write operation from day one. Stale caches cause bugs that only appear in production."},
+{title:"Cardinality",body:"Prometheus label values must have low cardinality (< ~100 possible values). Never use user IDs or request IDs as labels. High cardinality destroys Prometheus performance."},
+{title:"Java Bridge",body:"Redis caching ≈ Spring @Cacheable with Redis. Prometheus ≈ Micrometer. OpenTelemetry is IDENTICAL spec to Java — same W3C traceparent headers, same OTLP protocol. Only the SDK is different."},
+]},
+
+{p:4,n:19,title:"Python Internals & Advanced Patterns",
+goal:"Go deep on how Python actually works: CPython memory model, the data model protocol, descriptors, and metaclasses. This knowledge lets you debug library behavior, write optimized code, and understand any Python codebase at a deep level.",
+builds_on:"Weeks 9–11: OOP — you've used classes and dunders extensively. Now understand how they work internally. Week 12: Generators — coroutines and descriptors both use generator-like protocols",
+leads_to:"Week 20: Capstone — this knowledge lets you architect, debug, and optimize at a senior level",
+skip:"This week has very few Java parallels. CPython's reference counting is completely different from JVM GC. Metaclasses and descriptors are unique to Python. Read carefully even as a Java expert.",
+hrs:"1.5",days:"5",tot:"~8",
+sched:[
+{d:"Mon",t:"<strong>CPython memory model:</strong> Reference counting, GIL, integer/string interning, tracemalloc.",time:"1.5 hrs",
+concepts:["reference counting","sys.getrefcount","id()","interning","tracemalloc","GIL"],
+pr:[
+{t:"code",p:"Prove reference counting: sys.getrefcount() before, during, after passing object to a function. Explain: why does a=256; b=256; print(a is b) return True but a=257; b=257; print(a is b) return False?"},
+{t:"stretch",p:"Use tracemalloc: memory of 1 million integers in list vs tuple vs array.array('i') vs generator. Document MB difference. Explain each result based on what CPython actually allocates."},
+]},
+{d:"Tue",t:"<strong>Full data model protocol:</strong> The complete dunder map. Every built-in operation calls a dunder — understanding this explains all Python libraries.",time:"1.5 hrs",
+concepts:["full dunder protocol","__slots__","__call__","data model as protocol","operator mapping"],
+pr:[
+{t:"code",p:"Build complete Vector2D with every relevant dunder: __repr__, __eq__, __hash__, __add__, __sub__, __mul__, __rmul__, __abs__, __bool__, __iter__. Verify: dict key, set member, sorted()."},
+{t:"code",p:"Add __slots__ = ['x','y']. Measure memory of 100,000 instances with vs without slots using tracemalloc. Explain what slots do: no per-instance __dict__ allocation."},
+]},
+{d:"Wed",t:"<strong>Descriptors:</strong> How @property, @classmethod, @staticmethod work internally.",time:"1.5 hrs",
+concepts:["__get__/__set__/__delete__","data vs non-data descriptor","@property internals","LazyProperty"],
+pr:[
+{t:"code",p:"Build TypedAttribute(expected_type) descriptor: raises TypeError on wrong-type assignment. Then implement a minimal @property from scratch using only a descriptor class. This reveals how the built-in works."},
+{t:"code",p:"Build LazyProperty: computes on first access, caches in instance dict. Prove compute function called exactly once across 100 accesses."},
+]},
+{d:"Thu",t:"<strong>Metaclasses:</strong> type as metaclass, class creation hooks, __init_subclass__.",time:"1.5 hrs",
+concepts:["type as metaclass","metaclass __call__","__init_subclass__","class creation order"],
+pr:[
+{t:"code",p:"Singleton metaclass: override __call__ so MyClass() is MyClass() is always True. Then rewrite using __init_subclass__ instead. Compare complexity — when is each approach better?"},
+{t:"stretch",p:"Simplified @dataclass using a metaclass: read __annotations__, auto-generate __init__, __repr__, __eq__. This reveals exactly how the real @dataclass works internally."},
+]},
+{d:"Fri",t:"<strong>Internals in practice:</strong> Using this knowledge to read library source and write better code.",time:"1.5 hrs",
+concepts:["reading source code","SQLAlchemy internals","FastAPI internals","Python optimization"],
+pr:[
+{t:"think",p:"Now you know descriptors: look at SQLAlchemy's mapped_column() in its source. Which descriptor dunder intercepts column attribute access? How does it know which table column it represents?"},
+{t:"think",p:"Now you know metaclasses: look at FastAPI's router @app.get decorator source. How does it register the function as a route handler? Trace through at least 3 levels of source code."},
+]},
+],
+res:[
+{type:"book",name:"Fluent Python 2nd Ed. — Luciano Ramalho",note:"The definitive Python internals book. Read Part I (Data Model) and Part IV (OOP)."},
+{type:"doc",name:"CPython Internals — Real Python (realpython.com)",note:"'Your Guide to the CPython Source Code'. Free and thorough."},
+{type:"vid",name:"Raymond Hettinger — Transforming Code into Beautiful Idiomatic Python (PyCon 2013)",note:"Best talk on internals applied to real code. Watch twice."},
+],
+ms:{icon:"🔬",name:"Python Internals Showcase",tag:"Memory profiling, descriptors, metaclasses in one project",
+desc:"A project demonstrating mastery of Python internals by building production-quality tools using low-level features.",
+specs:["@dataclass-like decorator built from scratch using metaclass","Custom ORM field descriptors (IntField, StrField) — same approach as SQLAlchemy","Memory benchmark suite comparing data structures with tracemalloc","Singleton cache using metaclass, LRU eviction using OrderedDict","LazyProperty descriptor throughout for expensive computed fields","mypy --strict clean, documented with WHY not just HOW"],
+deploy:"pip install -e . · importable · documented"},
+tips:[
+{title:"Internals = debugging superpower",body:"When a library does something mysterious, knowing Python's internals lets you read its source and understand it. SQLAlchemy, FastAPI, Pydantic — they're all just Python using these same tools."},
+{title:"Slots in practice",body:"Use __slots__ on classes where you create millions of instances: ORM row objects, numerical types. For typical web app models, the overhead is negligible — don't premature-optimize."},
+{title:"Metaclass rarity",body:"In 5 years of production Python, you may write 2–3 metaclasses yourself. But understanding them lets you read any Python library confidently. That's the real value."},
+{title:"Nothing Java has",body:"CPython reference counting, Python's data model protocol, descriptors, and metaclasses are genuinely Python-unique. Java reflection is the closest but far less integrated into the language."},
+]},
+
+{p:4,n:20,title:"Capstone — Production Microservices Platform",
+goal:"Tie all 20 weeks together into a deployable, observable, tested, auto-deployed microservices platform on your homelab. This is your portfolio project — the thing you show in senior engineering interviews.",
+builds_on:"Everything from Weeks 1–19. Every single concept — variables, OOP, async, FastAPI, SQLAlchemy, auth, testing, Docker, CI/CD, WebSockets, Celery, caching, observability, and internals.",
+leads_to:"Your career. Next: Kubernetes (k3s), Kafka, GraphQL, ML model serving, contributing to open source.",
+skip:"Nothing. This week is synthesis. Every concept from every week appears here.",
+hrs:"2",days:"6",tot:"~13",
+sched:[
+{d:"Mon",t:"<strong>Architecture &amp; ADRs:</strong> Service design, shared libraries, API gateway, Architecture Decision Records.",time:"2 hrs",
+concepts:["service boundaries","shared schemas","API gateway","ADR","Mermaid diagram"],
+pr:[
+{t:"code",p:"Draw your full architecture as a Mermaid diagram checked into the repo. Every arrow has a label explaining WHY it exists, not just what it connects."},
+{t:"think",p:"Write 3 ADRs in MADR format: FastAPI over Django, Celery over ARQ, PostgreSQL over MongoDB. Each: context, decision, consequences, alternatives. Future teammates and interviewers will read these."},
+]},
+{d:"Tue",t:"<strong>Resilience:</strong> Circuit breaker with tenacity, graceful degradation, chaos testing.",time:"2 hrs",
+concepts:["tenacity","circuit breaker","graceful degradation","chaos testing","failure modes"],
+pr:[
+{t:"code",p:"Add tenacity retry to every inter-service HTTP call: 3 retries, exponential backoff, retry only on 5xx and network errors. Kill a downstream service mid-request. Verify retry and fallback."},
+{t:"think",p:"Test each failure mode: Redis down, Postgres down, Celery crash mid-task, network partition. Document what degrades gracefully vs what fails hard. This is your resilience audit."},
+]},
+{d:"Wed",t:"<strong>E2E testing &amp; security audit:</strong> Cross-service tests, OWASP ZAP, Trivy.",time:"2 hrs",
+concepts:["E2E testing","OWASP ZAP","Trivy","PII audit","CVE remediation"],
+pr:[
+{t:"code",p:"Full E2E: register → login → create project → assign tasks → Celery processes → WebSocket notification received. All services running. Measure round-trip time."},
+{t:"code",p:"OWASP ZAP scan all endpoints — fix every High/Medium. Trivy scan all images — fix all CRITICAL CVEs. Audit all logs for PII leakage. Fix what you find."},
+]},
+{d:"Thu",t:"<strong>Documentation &amp; DX:</strong> README, runbooks, Bruno collection, onboarding simulation.",time:"2 hrs",
+concepts:["README","onboarding","Bruno collection","runbooks","DX audit"],
+pr:[
+{t:"code",p:"Write README: architecture diagram, prerequisites, local dev in one command (make dev), env vars reference, API overview, homelab deploy. Target: new developer running locally in 10 minutes."},
+{t:"think",p:"Onboarding simulation: close your README, open a fresh terminal, follow your own docs from scratch. Time it. Document every step that fails or is unclear. Fix it. This is the final quality bar."},
+]},
+{d:"Fri",t:"<strong>Load testing &amp; SLO verification:</strong> Locust scenarios, performance baseline, SLO confirmation.",time:"2 hrs",
+concepts:["Locust","SLO verification","1000 RPS target","p99 latency","error rate"],
+pr:[
+{t:"code",p:"Locust with 500 concurrent users for 5 minutes. Target: 1000 RPS, p99 < 200ms, error rate < 0.1%. If you don't hit it, profile and optimize. Document the final baseline."},
+{t:"code",p:"Inject a deliberate 5% error rate bug. Time yourself going from alert to root cause to fix using your observability stack. Target: under 10 minutes. This is production readiness."},
+]},
+{d:"Sat",t:"<strong>Showcase, retrospective &amp; next steps.</strong>",time:"3 hrs",
+pr:[
+{t:"think",p:"Write a retrospective: what was harder than expected? What clicked faster? What would you do differently? Post it on dev.to or your blog. Teaching compounds learning significantly."},
+{t:"code",p:"Record a 5-minute demo: start the full homelab stack, walk through one user journey end-to-end, show Grafana, show a distributed trace. Upload for your portfolio."},
+]},
+],
+res:[
+{type:"book",name:"Building Microservices — Sam Newman (O'Reilly)",note:"The canonical reference. Skim this week; return over the next 6 months."},
+{type:"repo",name:"github.com/jd/tenacity",note:"Retry/circuit breaker. Production-proven for all inter-service HTTP calls."},
+{type:"doc",name:"Architecture Decision Records — adr.github.io",note:"MADR format. Future teammates depend on these."},
+{type:"tool",name:"Bruno — usebruno.com",note:"Open-source Postman. Store API collections in Git. No account required."},
+],
+ms:{icon:"🚀",name:"Homelab Microservices Platform",tag:"20 weeks · production-grade · fully observable · auto-deployed",
+desc:"Fully deployed, monitored, tested, and documented microservices platform on your homelab. Your senior-level portfolio piece.",
+specs:["<strong>Services:</strong> API Gateway, Task Service, Auth Service, Notification Service, Worker Service","<strong>Data:</strong> PostgreSQL 16, Redis 7, MinIO (S3-compatible object storage)","<strong>Gateway:</strong> nginx routing, rate limiting, TLS termination","<strong>Observability:</strong> Grafana + Prometheus + Loki + Jaeger — full LGTM stack","<strong>CI/CD:</strong> test → build → push → auto-deploy on every main merge","<strong>Security:</strong> non-root containers, Docker secrets, Trivy clean in CI","<strong>Docs:</strong> OpenAPI, Mermaid architecture, 3 ADRs, runbooks, Bruno collection","<strong>Load tested:</strong> 1000 RPS, p99 < 200ms, error rate < 0.1%"],
+deploy:"Full homelab · nginx TLS · auto-deploy · all dashboards live · all services healthy"},
+tips:[
+{title:"20 weeks ago",body:"You started with print('Hello World'). You now have a production microservices platform with distributed tracing, automated deployment, and load-tested SLOs. Measure the distance."},
+{title:"Next steps",body:"Weeks 21–30: Kubernetes (k3s on homelab), Apache Kafka, GraphQL with Strawberry, ML model serving with FastAPI, contributing PRs to open source Python projects."},
+{title:"Portfolio value",body:"Every ADR you wrote is an interview answer. 'Why FastAPI over Django?' with a written ADR shows senior-level thinking — you considered tradeoffs, not just picked something popular."},
+{title:"Community",body:"Join FastAPI Discord and Python Discord. Find a 'good first issue' on any Python project you've used this week. One PR teaches more than 10 blog posts."},
+]},
+];
+
+const phases=[
+{n:0,label:'Absolute Basics',wks:'1–4'},
+{n:1,label:'Data Structures',wks:'5–8'},
+{n:2,label:'OOP & Intermediate',wks:'9–12'},
+{n:3,label:'Backend Dev',wks:'13–16'},
+{n:4,label:'Production',wks:'17–20'},
+];
+
+function pit(t){return{code:'pi-code',think:'pi-think',fix:'pi-fix',stretch:'pi-stretch'}[t]||'pi-code';}
+
+function renderContent(){
+  document.getElementById('con').innerHTML=W.map(w=>{
+    const pc=`p${w.p}`;
+    const tags=['p0t','p1t','p2t','p3t','p4t'];
+    const mc=`p${w.p}-ms`;
+    const tc=`p${w.p}-tc`;
+    const pnames=['Absolute Basics','Data Structures','OOP & Intermediate','Backend Dev','Production'];
+
+    const sched=w.sched.map(d=>{
+      const prs=(d.pr||[]).map(pi=>`<div class="pi ${pit(pi.t)}">${pi.p}</div>`).join('');
+      const ctgs=(d.concepts||[]).map(c=>`<span class="ct">${c}</span>`).join('');
+      return `<div class="drow">
+        <div class="drh">
+          <div><div class="dlabel">${d.d}</div><span class="dtbadge">${d.time}</span></div>
+          <div><div class="dtasks ${pc}s">${d.t}</div>${ctgs?`<div class="ctags">${ctgs}</div>`:''}</div>
+        </div>
+        ${prs?`<div class="dpr"><div class="prhdr">practice problems</div><div class="pitems">${prs}</div></div>`:''}
+      </div>`;
+    }).join('');
+
+    const ress=w.res.map(r=>`<div class="ri"><span class="rt rt-${r.type}">${r.type}</span><div class="rb"><span class="rn">${r.name}</span><span class="rnote">${r.note}</span></div></div>`).join('');
+    const specs=w.ms.specs.map(s=>`<li>${s}</li>`).join('');
+    const tips=w.tips.map(t=>`<div class="tc ${tc}"><div class="tt">${t.title}</div><div class="tb">${t.body}</div></div>`).join('');
+
+    return `<div class="wp" id="w${w.n}">
+      <div class="whdr">
+        <div class="wtag ${tags[w.p]}">Week ${w.n} · ${pnames[w.p]}</div>
+        <h2 class="wtitle">${w.title}</h2>
+        <p class="wgoal">${w.goal}</p>
+      </div>
+      ${w.skip?`<div class="skip-banner"><div class="skip-icon">⚡</div><div class="skip-text"><strong>Java devs can skim:</strong> ${w.skip}</div></div>`:''}
+      <div class="bridge">
+        <div class="bc"><div class="bl from">Builds on</div><div class="bt">${w.builds_on}</div></div>
+        <div class="bc"><div class="bl to">Leads into</div><div class="bt">${w.leads_to}</div></div>
+      </div>
+      <div class="cbar">
+        <div class="ci"><span class="cn ${pc}n">${w.hrs}</span><span class="cl">hrs/day</span></div>
+        <div class="cdiv"></div>
+        <div class="ci"><span class="cn ${pc}n">${w.days}</span><span class="cl">days/wk</span></div>
+        <div class="cdiv"></div>
+        <div class="ci"><span class="cn ${pc}n">${w.tot}</span><span class="cl">total hrs</span></div>
+      </div>
+      <div class="sec"><div class="stitle">Daily Schedule + Practice</div><div class="dgrid">${sched}</div></div>
+      <div class="sec"><div class="stitle">Resources</div><div class="rlist">${ress}</div></div>
+      <div class="sec"><div class="stitle">Weekly Milestone</div>
+        <div class="ms ${mc}">
+          <div class="ms-hdr">
+            <div class="ms-icon">${w.ms.icon}</div>
+            <div><div class="ms-lbl">Milestone · Week ${w.n}</div><div class="ms-name">${w.ms.name}</div><div class="ms-tag">${w.ms.tag}</div></div>
+          </div>
+          <div class="ms-body"><p>${w.ms.desc}</p><ul class="sl">${specs}</ul><div class="dbadge">🏠 ${w.ms.deploy}</div></div>
+        </div>
+      </div>
+      <div class="sec"><div class="stitle">Engineer's Notes</div><div class="tgrid">${tips}</div></div>
+    </div>`;
+  }).join('');
+}
+
+function renderSB(phase){
+  document.getElementById('sb').innerHTML=phases.map(ph=>{
+    const wks=W.filter(w=>w.p===ph.n);
+    return `<div class="sb-ph">Phase ${ph.n} — ${ph.label}</div>`+
+      wks.map(w=>`<button class="wb p${w.p}${phase===w.p?' active':''}" onclick="showW(${w.n})" id="sb${w.n}"><span class="wn">WEEK ${w.n<10?'0'+w.n:w.n}</span>${w.title}</button>`).join('');
+  }).join('');
+}
+
+let curPhase=0;
+function sw(p){
+  curPhase=p;
+  document.querySelectorAll('.pbtn').forEach((b,i)=>b.classList.toggle('active',i===p));
+  renderSB(p);
+  showW(W.find(w=>w.p===p).n);
+}
+function showW(n){
+  document.querySelectorAll('.wp').forEach(wp=>wp.classList.remove('vis'));
+  document.getElementById('w'+n)?.classList.add('vis');
+  document.querySelectorAll('.wb').forEach(b=>{b.classList.remove('active');if(b.id==='sb'+n)b.classList.add('active');});
+  document.querySelector('.con').scrollTop=0;
+}
+renderContent();renderSB(0);showW(1);
+</script>
+</body>
+</html>
