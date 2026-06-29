@@ -1,129 +1,92 @@
-#Weekly milestone week 5
-import re as regex
-import sys
+#Weekly Milestone
 
-#TODO read the text from a file passed as a command-line argument
+#TODO: Manage a class of students and their grades, demonstrating every list
+#TODO: operation fromt his week. 
+#* Specifications: 
+#? Student list of dicts: [ {'name':'Alice','grades':[88,92,79] } ]
+#? Calculate average grade for each student
+#? Sort students by average descending
+#? Find: top 3 students, students below 70 average (use comprehensions)
+#? Generate a formatted class report with aligned columns
+#? Add and remove students dynamically
 
+#! We stopped using list comprehension to print because it was a waste of 
+#! memory, it keeps making empty lists just print, it was unecessary.
 
-if len(sys.argv) < 2:
-    print("Please Enter Both Files!")
-    print("Example: python workingfile.py test_file.txt")
-    sys.exit()
+student_list = [
+    {"name":"Byron",
+     "grades":[88, 92, 79]},
+    {"name":"Cris",
+     "grades": [92,52,17]},
+    {"name":"Kevin",
+     "grades":[82,88,42]},
+    {"name": "Erick",
+     "grades": [53, 23, 76]}
+]
 
-file_name = sys.argv[1]
-
-with open(file_name, "r", encoding="utf-8") as file:
-    content = file.read()
-
-
-formated_content = content.lower().split()
-
-#TODO FORMAT everything with f strings, starting from top 
-#1. Word count, character count (with / without spaces) , sentence count
-
-word_count = {}
-count = 0
-for word in formated_content:
-    if word in word_count:
-        word_count[word] += 1
-    else:
-        word_count[word] = 1
-print("Word Count:\nWord:           | Count:")
-
-#! We're here for word count 
-# * completed.
-for key, value in word_count.items():
-    print(f"{key:<15} | {value}")
-
-#! Now here: 
-#* Status: Complete
-#Character count 
-char_count = 0
-char_count = {}
-
-#paragraph_for_char = paragraph.lower().replace(" ", "")
-content_char = content.strip().lower().replace(" ", "")
-print("Testing: ")
-
-#? Here we are just uniting all the characters/words into one whole
-
-#* which then this comes in to play
-for char in content_char:
-    if char in char_count:
-        char_count[char] +=1
-    else:
-        char_count[char] = 1
-print("Character Count: \nChar  |  Count")
-for key, value in char_count.items():
-    print(f"{key:<5} | {value}")
-#sentence count
-#! Work on sentence count now
-#* Status: Complete.
-
-content_sentence = content.strip().rstrip(".").split(".")
-len_content_sentence = len(content_sentence)
-print(f"Sentence Count: {len_content_sentence}")
-
-#! Problem
-#! Here
-#! Work from here and keep going down, most of other comments should be done.
-#* Completed (content)
-
-#TODO Testing the sentence count apperently it was wrong.
-#testing_sentence = "Sentence one. Sentence two."
-#test_sentence = testing_sentence.rstrip(".").split(".")
-#print("TESTING: ")
-#print(len(test_sentence))
-#? End of test here.
+print("Average Grades: ")
+average_grade = [(info['name'], sum(info['grades'])/len(info["grades"])) for info in student_list]
+#* we used list comphrension to location the name and the lsit of grades in the list of dicts
+#* then we took the sum of list of grades in the student_list all in one line
 
 
-#Top 10 most common words:
+#[print(f"Name: {name:<8} | Grade Average: {grade:.2f}") for name, grade in average_grade]
+for name, grade in average_grade: 
+    print(f"Name: {name:<8} | Grade: {grade:.2f}")
+#* printed only what we needed to output using parenthesis
+#* for every name and grade in the list comprehension above
 
-sorted_dict = sorted(word_count.items(), key=lambda kv: kv[1], reverse=True)
+print()
+sorted_grades = sorted(average_grade, key= lambda student: student[1], reverse=True)
+#* we used sorted() to sort the average grades, using a lambda function
+#* then since average_grade is a tuple (name, grade) we had to specify in the 
+#* lambda function which index in the tuple do we want to sort by 
+#* i picked the grade and then reversed it to have descending order.
 
-top_sorted_words = sorted_dict[:10]
+print(f"Sorted Students Descending Order: ")
+#[print(f"Name: {name:<8} | Grade Avg: {grade:.2f}") for name, grade in sorted_grades]
+for name, grade in sorted_grades:
+    print(f"Name: {name:<8} | Grade avg: {grade:.2f}")
+#*then used list comprehension to print out the name and grade using parenthesis
+#* for name and grade in the sorted_grades variable.
 
-top_dict_words = dict(top_sorted_words)
-top_dict_keys = top_dict_words.keys()
-
-#print("Top 10 Words: ")
-#for word in top_dict_keys:
-    #print(word, end= "\n" )
-#* Status Complete.
-#* Trying to format the top 10 words with their keys (words) and values (occurences)
-print("Top 10 Words: ")
-for key, value in top_dict_words.items():
-    print(f"{key:<10} | {value}")
-
-
-#! TODO instead of using min/max as numbers, use words: 
-#longest and shortest word:
-
-longest_word = formated_content[0]
-shortest_word = formated_content[0]
-
-#use paragraph_v2
-for word in formated_content:
-    if len(word) > len(longest_word):
-        longest_word = word
-    if len(word) < len(shortest_word):
-        shortest_word = word
-print(f"Longest Word: {longest_word}\nShortest Word: {shortest_word}")    
-
-#! UNTIL HERE FIX RED TODO (up) 
-#* Completed 
-
-#check for emails using regex
-pattern_email = r'[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]{,3}'
-pattern_URLS = r'[a-zA-Z]+[://]+[a-zA-Z]+\.[a-zA-Z]{,3}'
-
-#? Why another paragraph string?
-#* just to have the text a blit cleaner and a bit more organized.
-
-finding_emails = regex.findall(pattern_email, content)
-print(f"Emails Found: \n{finding_emails}")
-
-finding_URLS = regex.findall(pattern_URLS, content)
-print(f"URLs Found: \n{finding_URLS}")
+#! we are in the step FIND: 
+print(f"\nTop 3 Students:")
+#[print(f"Name: {name:<8} | Grade: {grade:.2f}") for name, grade in sorted_grades[:3]]
+for name, grade in sorted_grades[:3]:
+    print(f"Name: {name:<8} | Grade: {grade:.2f}")
+#* All i did was access the list of tuples in sorted grades, in a for loop 
+#* in this case a list comprehension we already access it, and we give a 
+#* variable name to whatever values are with the tuples, in this case it was 
+#* just 2 values, so name and grade. and then we specified those name and grade
+#* from where we were trying to access them, in this case sorted_grades
 
 
+print("\nBelow Average Students: ")
+#below_average = [(info["name"], sum(info["grades"])/len(info["grades"])) for info in student_list if sum(info["grades"])/len(info["grades"]) < 70]
+below_average = [(name, grade) for name, grade in average_grade if grade < 70]
+for name, grade in below_average:
+    print(f"Name: {name:<8} | Average: {grade:.2f}")
+#* in order to get the below average students we accessed the tuple used ()
+#* and name and grade to assign variables to whats inside the list of tuples in 
+#* average_grade. adding an if statement to filter out and only print who's
+#* average grade is less than 70
+
+
+#* Adding and Deleting 
+print("\nAdding and Removing: ")
+student_list.append({"name": "Sarah", "grades": [90, 82, 85]})
+
+removing_with_list = [info for info in student_list if info["name"] != "Cris"]
+#* here we just filtered out the list of dicts to include everything but the 
+#* the section with "Cris" in it
+print(removing_with_list)
+
+student_list = removing_with_list
+#* since it was the same format of the original list and we wanted to 
+#*change the original list, we made the student_list equal to the removing list
+
+for info in student_list:
+    print(f"Name: {info['name']} | Grades: {info['grades']}")
+#* then we accessed the list of dicts using a for loop and formatted the 
+#* how we wanted the output to be based on the keys/values in the dicts
