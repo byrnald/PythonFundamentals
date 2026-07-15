@@ -122,7 +122,7 @@ print(word_frequency)
 
 a = {"key": "value"}
 
-b = {"testing": "nigga"}
+b = {"testing": "stuff"}
 c = a
 
 a.update(b)
@@ -509,7 +509,6 @@ print(alphabetical_order.keys())
 # other_version = sorted(personal_information)
 # * since sorted automatically sorts things in alphabetical order by default
 
-print("\nTesting: ")
 print("Import: ")
 
 with open("WeeklyMilestone-7", "w") as file:
