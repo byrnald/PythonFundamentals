@@ -1,0 +1,17 @@
+{
+  "Alice": {
+    "phone": "555-0198",
+    "email": "alice@example.com",
+    "tags": [
+      "friend",
+      "work"
+    ]
+  },
+  "Bob": {
+    "phone": "555-6742",
+    "email": "bob@example.com",
+    "tags": [
+      "gym"
+    ]
+  }
+}

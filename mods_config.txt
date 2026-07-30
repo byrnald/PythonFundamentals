@@ -1,0 +1,6 @@
+# ModName, Version, Tags
+OptiFine, 1.20.1, performance-graphics
+# TestMod, 1.0, test
+broken_line_missing_data
+JourneyMap, 5.9, map-utility
+JEI, 11.6, ui-inventory
